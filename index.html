@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thalaivar Zone - Mind It!</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffd700;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: radial-gradient(circle, #333 10%, #1a1a1a 80%);
+            min-height: 100vh;
+        }
+        
+        header {
+            padding: 40px 20px;
+            background-color: #8b0000;
+            border-bottom: 5px solid #ffd700;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 0px #000;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .content-box {
+            margin: 40px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            background-color: #2a2a2a;
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        #rajini-gif {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            border: 4px solid #8b0000;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #rajini-gif:hover {
+            transform: scale(1.05);
+        }
+
+        #fact-display {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            line-height: 1.4;
+            min-height: 80px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        button {
+            background-color: #ffd700;
+            color: #8b0000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background-color: #ffea00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Thalaivar Zone</h1>
+        <p class="subtitle">"Naan oru thadava sonna, nooru thadava sonna maadiri!"</p>
+    </header>
+
+    <div class="content-box">
+        <img id="rajini-gif" src="https://media.tenor.com/GfD_zZfUf-cAAAAC/rajini-style.gif" alt="Rajinikanth Style">
+        
+        <div id="fact-display">
+            Rajinikanth doesn't wear a watch. He decides what time it is.
+        </div>
+
+        <button onclick="generateMagic()">Show me Rajini Magic!</button>
+    </div>
+
+    <div class="footer">
+        Warning: Viewing this webpage for too long may result in sudden urges to flip sunglasses and toss cigarettes into your mouth.
+    </div>
+
+    <script>
+        // Array of legendary Rajinikanth facts
+        const rajiniFacts = [
+            "Rajinikanth can divide by zero.",
+            "When Rajinikanth does push-ups, he isn't lifting himself up. He's pushing the Earth down.",
+            "Rajinikanth knows Victoria's secret.",
+            "Rajinikanth can kill two stones with one bird.",
+            "Once a cobra bit Rajinikanth's leg. After five days of excruciating pain, the cobra died.",
+            "Rajinikanth makes onions cry.",
+            "Rajinikanth can delete the Recycling Bin.",
+            "Ghosts sit around the campfire and tell Rajinikanth stories.",
+            "Rajinikanth's calendar goes straight from March 31st to April 2nd. Nobody fools Rajinikanth.",
+            "When Alexander Graham Bell invented the telephone, he had 3 missed calls from Rajinikanth."
+        ];
+
+        // Array of fun Rajinikanth GIFs (Tenor/Giphy links)
+        const rajiniGifs = [
+            "https://media.tenor.com/H1y9x25c_M0AAAAC/rajinikanth-salute.gif",
+            "https://media.tenor.com/m2X6X40K_P8AAAAC/rajinikanth-cool.gif",
+            "https://media.tenor.com/2U5M9f41g-oAAAAC/rajini-smile.gif",
+            "https://media.tenor.com/s64jCEX8Qz0AAAAC/rajinikanth-style.gif",
+            "https://media.tenor.com/9C32h_I4w3AAAAAC/rajinikanth-cool.gif",
+            "https://media.tenor.com/GfD_zZfUf-cAAAAC/rajini-style.gif"
+        ];
+
+        function generateMagic() {
+            // Get random fact and GIF
+            const randomFact = rajiniFacts[Math.floor(Math.random() * rajiniFacts.length)];
+            const randomGif = rajiniGifs[Math.floor(Math.random() * rajiniGifs.length)];
+
+            // Update the DOM
+            document.getElementById('fact-display').innerText = randomFact;
+            document.getElementById('rajini-gif').src = randomGif;
+            
+            // Add a little shake animation to the button for fun
+            const btn = document.querySelector('button');
+            btn.style.transform = "rotate(5deg)";
+            setTimeout(() => {
+                btn.style.transform = "rotate(-5deg)";
+            }, 100);
+            setTimeout(() => {
+                btn.style.transform = "rotate(0deg)";
+            }, 200);
+        }
+    </script>
+</body>
+</html>
