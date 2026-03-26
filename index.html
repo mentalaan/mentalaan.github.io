@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thalaivar Zone - Mind It!</title>
+    <title>Mentalan Zone - Mind It!</title>
     <style>
         body {
             background-color: #1a1a1a;
@@ -66,8 +66,11 @@
             font-size: 1.5rem;
             margin: 20px 0;
             line-height: 1.4;
-            min-height: 80px;
+            min-height: 100px;
             text-shadow: 1px 1px 2px #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         button {
@@ -106,57 +109,49 @@
 <body>
 
     <header>
-        <h1>Thalaivar Zone</h1>
-        <p class="subtitle">"Naan oru thadava sonna, nooru thadava sonna maadiri!"</p>
+        <h1>Mentalan Zone</h1>
+        <p class="subtitle">இப்போ இல்லனா எப்பவும் இல்ல!!🤘</p>
     </header>
 
     <div class="content-box">
-        <img id="rajini-gif" src="https://media.tenor.com/GfD_zZfUf-cAAAAC/rajini-style.gif" alt="Rajinikanth Style">
+        <img id="rajini-gif" src="mentalan.gif" alt="Mentalan Magic">
         
         <div id="fact-display">
-            Rajinikanth doesn't wear a watch. He decides what time it is.
+            நான் அரசியலுக்கு வருவது உறுதி!
         </div>
 
-        <button onclick="generateMagic()">Show me Rajini Magic!</button>
+        <button onclick="generateMagic()">🤡</button>
     </div>
 
     <div class="footer">
-        Warning: Viewing this webpage for too long may result in sudden urges to flip sunglasses and toss cigarettes into your mouth.
+        📍மெண்டலான்பேட்டை
     </div>
 
     <script>
-        // Array of legendary Rajinikanth facts
+        // Array of legendary, heavily trolled Rajini political statements
         const rajiniFacts = [
-            "Rajinikanth can divide by zero.",
-            "When Rajinikanth does push-ups, he isn't lifting himself up. He's pushing the Earth down.",
-            "Rajinikanth knows Victoria's secret.",
-            "Rajinikanth can kill two stones with one bird.",
-            "Once a cobra bit Rajinikanth's leg. After five days of excruciating pain, the cobra died.",
-            "Rajinikanth makes onions cry.",
-            "Rajinikanth can delete the Recycling Bin.",
-            "Ghosts sit around the campfire and tell Rajinikanth stories.",
-            "Rajinikanth's calendar goes straight from March 31st to April 2nd. Nobody fools Rajinikanth.",
-            "When Alexander Graham Bell invented the telephone, he had 3 missed calls from Rajinikanth."
+            "சிஸ்டம் சரி இல்ல...",
+            "அதிசயம் நடக்கும்... அற்புதம் நடக்கும்...",
+            "எதற்கெடுத்தாலும் போராட்டம் என்றால் தமிழ்நாடு சுடுகாடாகிவிடும்!",
+            "நான் அரசியலுக்கு வருவது உறுதி!",
+            "எனக்கு முதல்வர் பதவி மேல ஆசை இல்லை... கட்சி தலைவர் மட்டும் தான்!",
+            "ஆன்மீக அரசியல்!",
+            
+            
+            "இப்போ இல்லனா எப்பவும் இல்ல!"
         ];
 
-        // Array of fun Rajinikanth GIFs (Tenor/Giphy links)
+        // Keeps using your local GIF
         const rajiniGifs = [
-            "https://media.tenor.com/H1y9x25c_M0AAAAC/rajinikanth-salute.gif",
-            "https://media.tenor.com/m2X6X40K_P8AAAAC/rajinikanth-cool.gif",
-            "https://media.tenor.com/2U5M9f41g-oAAAAC/rajini-smile.gif",
-            "https://media.tenor.com/s64jCEX8Qz0AAAAC/rajinikanth-style.gif",
-            "https://media.tenor.com/9C32h_I4w3AAAAAC/rajinikanth-cool.gif",
-            "https://media.tenor.com/GfD_zZfUf-cAAAAC/rajini-style.gif"
+            "mentalan.gif"
         ];
 
         function generateMagic() {
-            // Get random fact and GIF
+            // Get random quote
             const randomFact = rajiniFacts[Math.floor(Math.random() * rajiniFacts.length)];
-            const randomGif = rajiniGifs[Math.floor(Math.random() * rajiniGifs.length)];
 
             // Update the DOM
             document.getElementById('fact-display').innerText = randomFact;
-            document.getElementById('rajini-gif').src = randomGif;
             
             // Add a little shake animation to the button for fun
             const btn = document.querySelector('button');
@@ -171,3 +166,7 @@
     </script>
 </body>
 </html>
+
+            
+            
+
