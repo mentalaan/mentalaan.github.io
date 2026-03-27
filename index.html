@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ＶＡＰＯＲＷＡＶＥ // １９９５</title>
+    <style>
+        /* === BASE AESTHETIC === */
+        body {
+            background: linear-gradient(180deg, #1a0b2e 0%, #2b1055 50%, #7597de 100%);
+            background-attachment: fixed;
+            color: #01cdfe;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide scrollbars for the immersive effect */
+        }
+
+        /* === CRT SCANLINE OVERLAY === */
+        .crt::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 100;
+            pointer-events: none; /* Lets you click through the scanlines */
+        }
+
+        /* === TYPOGRAPHY === */
+        .text-container {
+            position: relative;
+            z-index: 10;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 5rem;
+            color: #fffb96;
+            text-shadow: 4px 4px 0px #ff71ce, 0 0 20px #ff71ce;
+            letter-spacing: 15px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            color: #05ffa1;
+            text-shadow: 2px 2px 0px #2b1055, 0 0 10px #05ffa1;
+            letter-spacing: 10px;
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+
+        /* marquee {
+            width: 100%;
+            background-color: #ff71ce;
+            color: #1a0b2e;
+            font-weight: bold;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            z-index: 50;
+            border-bottom: 3px solid #05ffa1;
+            box-shadow: 0 5px 15px rgba(255, 113, 206, 0.4);
+        } */
+         .vapor-marquee-container {
+            width: 100%;
+            background-color: #ff71ce;
+            color: #2b1055;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            border-bottom: 3px solid #01cdfe;
+            z-index: 10;
+            overflow: hidden;       /* Hides the text outside the box */
+            white-space: nowrap;    /* Forces text onto one line */
+        }
+
+        .vapor-marquee-text {
+            display: inline-block;
+            /* 15s is the speed. Lower = faster, Higher = slower */
+            animation: scrollText 15s linear infinite; 
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(100vw); /* Start off-screen Right */
+            }
+            100% {
+                transform: translateX(-100%); /* End off-screen Left */
+            }
+        }
+
+        /* === WINDOWS 95 UI (THE COUNTER) === */
+        .win95-window {
+            background: #c0c0c0;
+            border-top: 3px solid #ffffff;
+            border-left: 3px solid #ffffff;
+            border-right: 3px solid #808080;
+            border-bottom: 3px solid #808080;
+            padding: 2px;
+            width: 350px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+        }
+
+        .win95-titlebar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 1px;
+        }
+
+        .win95-close {
+            background: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            width: 16px;
+            height: 16px;
+            font-weight: bold;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .win95-content {
+            padding: 20px;
+            color: #000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .vapor-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff00ff;
+            text-shadow: 2px 2px #00ffff;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* === THE HORIZON (SUN & GRID) === */
+        .sun {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(180deg, #ffeb3b 0%, #ff71ce 100%);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20vh;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0 0 80px #ff71ce;
+            /* Creates the classic sliced effect */
+            mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
+            -webkit-mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
+        }
+
+        .grid-container {
+            perspective: 600px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40vh;
+            z-index: 2;
+        }
+
+        .grid {
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(to right, #01cdfe 2px, transparent 2px),
+                linear-gradient(to top, #ff71ce 2px, transparent 2px);
+            background-size: 60px 60px;
+            transform: rotateX(75deg);
+            animation: moveGrid 3s linear infinite;
+            box-shadow: 0 0 20px #01cdfe inset;
+        }
+
+        /* Fade out the grid at the horizon */
+        .grid-fade {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #2b1055 0%, transparent 40%);
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes moveGrid {
+            0% { transform: rotateX(75deg) translateY(0); }
+            100% { transform: rotateX(75deg) translateY(60px); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="crt">
+
+    <div class="vapor-marquee-container">
+        <div class="vapor-marquee-text">
+        ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ
+    </div></div>
+
+    <div class="sun"></div>
+    
+    <div class="grid-container">
+        <div class="grid"></div>
+        <div class="grid-fade"></div>
+    </div>
+
+    <div class="text-container">
+        <h1>Ｍｅｎｔａｌａｎ</h1>
+        <h2>// デジタル //</h2>
+    </div>
+
+    <div class="win95-window">
+        <div class="win95-titlebar">
+            <span>visitor_log.exe</span>
+            <div class="win95-close">X</div>
+        </div>
+        <div class="win95-content">
+            <span style="font-weight: bold;">VISITORS:</span>
+            <span id="visitor-count" class="vapor-number">L0AD1NG...</span>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ CHANGE THIS URL to your actual Render backend URL
+        const backendUrl = "https://mentalan-backend.onrender.com/counter";
+
+        async function fetchHitCount() {
+            const counterElement = document.getElementById("visitor-count");
+            
+            try {
+                const response = await fetch(backendUrl);
+                if (!response.ok) throw new Error("Network response was not ok");
+
+                const data = await response.json();
+                
+                // Adding a slight delay just for aesthetic drama
+                setTimeout(() => {
+                    counterElement.innerText = data.count;
+                }, 800);
+                
+            } catch (error) {
+                console.error("Error fetching the counter:", error);
+                setTimeout(() => {
+                    counterElement.innerText = "ERR_404";
+                    counterElement.style.color = "#ff0000"; 
+                    counterElement.style.textShadow = "2px 2px #000";
+                }, 800);
+            }
+        }
+
+        fetchHitCount();
+    </script>
+</body>
+</html>
