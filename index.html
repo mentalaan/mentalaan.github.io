@@ -25,21 +25,6 @@
             flex-direction: column;
         }
 
-        /* === 90s MARQUEE === */
-        /* marquee {
-            width: 100%;
-            background-color: #ff71ce;
-            color: #2b1055;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            font-size: 1.2rem;
-            padding: 10px 0;
-            position: absolute;
-            top: 0;
-            border-bottom: 3px solid #01cdfe;
-            z-index: 10;
-        } */
-
         /* === BULLETPROOF CSS MARQUEE === */
         .vapor-marquee-container {
             width: 100%;
@@ -47,38 +32,35 @@
             color: #2b1055;
             font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: clamp(0.9rem, 3vw, 1.2rem); /* Fluid font size */
             padding: 10px 0;
             position: absolute;
             top: 0;
             border-bottom: 3px solid #01cdfe;
             z-index: 10;
-            overflow: hidden;       /* Hides the text outside the box */
-            white-space: nowrap;    /* Forces text onto one line */
+            overflow: hidden;
+            white-space: nowrap;
         }
 
         .vapor-marquee-text {
             display: inline-block;
-            /* 15s is the speed. Lower = faster, Higher = slower */
             animation: scrollText 15s linear infinite; 
         }
 
         @keyframes scrollText {
-            0% {
-                transform: translateX(100vw); /* Start off-screen Right */
-            }
-            100% {
-                transform: translateX(-100%); /* End off-screen Left */
-            }
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
         }
+
         /* === THE GLOWING SUN & SCANLINES === */
         .sun {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 35vh;
-            height: 35vh;
+            /* Using min() ensures it doesn't get too wide on small screens */
+            width: min(35vh, 80vw);
+            height: min(35vh, 80vw);
             background: linear-gradient(180deg, #ffea00 0%, #ff0055 100%);
             border-radius: 50%;
             box-shadow: 0 0 60px rgba(255, 0, 85, 0.8), 0 0 120px rgba(255, 234, 0, 0.4);
@@ -136,11 +118,13 @@
         .glass-card {
             position: relative;
             z-index: 3;
+            width: 90%; /* Responsive width */
+            max-width: 600px; /* Caps the width on desktop */
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            padding: 40px;
+            padding: clamp(20px, 5vw, 40px); /* Fluid padding */
             text-align: center;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
             animation: float 4s ease-in-out infinite;
@@ -158,23 +142,26 @@
         /* === TYPOGRAPHY & MEDIA === */
         h1 {
             color: #fff;
-            font-size: 4.5rem;
-            letter-spacing: 10px;
+            /* clamp(MIN, PREFERRED, MAX) */
+            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            letter-spacing: clamp(3px, 2vw, 10px);
             text-transform: uppercase;
             text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #0ff, 0 0 40px #0ff, 0 0 80px #0ff;
             margin-bottom: 5px;
+            line-height: 1.1;
         }
 
         p {
             color: #05ffa1;
-            font-size: 1.8rem;
-            letter-spacing: 5px;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            letter-spacing: clamp(2px, 1vw, 5px);
             text-shadow: 0 0 10px #05ffa1;
             margin-bottom: 20px;
         }
 
         .aesthetic-gif {
-            width: 300px;
+            width: 100%; /* Makes it responsive */
+            max-width: 300px; /* Prevents it from getting too big */
             height: auto;
             border-radius: 10px;
             margin-bottom: 30px;
@@ -194,22 +181,36 @@
             background-color: #ff00ff;
             color: #00ffff;
             border: 3px solid #00ffff;
-            padding: 15px 30px;
-            display: inline-block;
+            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 30px);
+            display: flex;
+            flex-direction: column; /* Stacks text and number on mobile */
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            width: 100%;
+            max-width: 400px;
             box-shadow: 6px 6px 0px #000080;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Media query for desktop to put counter items side-by-side */
+        @media (min-width: 480px) {
+            .vapor-counter-box {
+                flex-direction: row;
+                gap: 15px;
+            }
         }
 
         .vapor-label {
-            font-size: 1.3rem;
-            margin-right: 15px;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             text-shadow: 2px 2px #000080;
         }
 
         .vapor-number {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             font-weight: bold;
             text-shadow: 3px 3px #000080;
             color: #ffffff;
@@ -217,7 +218,7 @@
 
         /* === THE BONK BUTTON === */
         .vapor-btn {
-            background-color: rgba(0, 0, 0, 0.5); /* Slightly dark background for contrast */
+            background-color: rgba(0, 0, 0, 0.5);
             border: 2px solid #05ffa1;
             padding: 10px 20px;
             cursor: pointer;
@@ -236,12 +237,11 @@
         }
 
         .vapor-btn:active {
-            transform: scale(0.90); /* Heavy bonk effect */
+            transform: scale(0.90);
         }
 
-        /* Sizing the GIF inside the button */
         .btn-gif {
-            height: 60px; /* Adjust this if the GIF is too big/small */
+            height: clamp(40px, 10vw, 60px); /* Scales the button GIF slightly */
             width: auto;
             border-radius: 5px;
             transition: filter 0.2s;
@@ -250,17 +250,12 @@
 </head>
 <body>
 
-    <!-- <marquee scrollamount="8">
-        ＷＥＬＣＯＭＥ ＴＯ ＴＨＥ ＶＩＲＴＵＡＬ ＰＬＡＺＡ // ＥＮＪＯＹ ＹＯＵＲ ＳＴＡＹ // ＮＯＴＨＩＮＧ ＩＳ ＲＥＡＬ
-    </marquee> -->
     <div class="vapor-marquee-container">
         <div class="vapor-marquee-text">
-    <!-- <marquee scrollamount="50"> -->
-        🤘🏻 இப்ப இல்லனா எப்பவும் இல்ல 🤘🏻 காலம் பேசாது, ஆனால் காத்திருந்து பதில் சொல்லும் 🤘🏻
-    <!-- </marquee> -->
-        </div></div>
+            🤘🏻 இப்ப இல்லனா எப்பவும் இல்ல 🤘🏻 காலம் பேசாது, ஆனால் காத்திருந்து பதில் சொல்லும் 🤘🏻
+        </div>
+    </div>
     
-
     <div class="sun"></div>
     
     <div class="grid-container">
@@ -269,9 +264,7 @@
 
     <div class="glass-card">
         <h1>Ｍｅｎｔａｌａｎ</h1>
-        <!-- <p>// デジタル //</p> -->
-         <p>// メンタラン //</p>
-        
+        <p>// メンタラン //</p>
         
         <img class="aesthetic-gif" src="mentalan.gif" alt="Aesthetic GIF">
 
@@ -287,7 +280,6 @@
     </div>
 
     <script>
-        // ⚠️ Point this directly to your single Render backend endpoint
         const backendUrl = "https://mentalan-backend.onrender.com/counter";
         const LoadUrl = "https://mentalan-backend.onrender.com/bonks";
         
@@ -296,16 +288,12 @@
 
         async function triggerHit() {
             try {
-                // Visual feedback: Turn Pepe grayscale while waiting for the server
                 hitButton.innerHTML = '<img src="bonk.gif" alt="BONK" class="btn-gif" style="filter: grayscale(100%); opacity: 0.5;">';
                 
                 const response = await fetch(backendUrl);
                 const data = await response.json();
                 
-                // Update the counter
                 counterElement.innerText = data.count;
-                
-                // Restore Pepe to his full colorful glory
                 hitButton.innerHTML = '<img src="bonk.gif" alt="BONK" class="btn-gif">';
                 
             } catch (error) {
@@ -318,31 +306,22 @@
 
         async function reloadHit() {
             try {
-                // Visual feedback: Turn Pepe grayscale while waiting for the server
                 hitButton.innerHTML = '<img src="bonk.gif" alt="BONK" class="btn-gif" style="filter: grayscale(100%); opacity: 0.5;">';
                 
                 const response = await fetch(LoadUrl);
                 const data = await response.json();
                 
-                // Update the counter
                 counterElement.innerText = data.count;
-                
-                // Restore Pepe to his full colorful glory
-                // hitButton.innerHTML = '<img src="bonk.gif" alt="BONK" class="btn-gif">';
+                hitButton.innerHTML = '<img src="bonk.gif" alt="BONK" class="btn-gif">';
                 
             } catch (error) {
                 console.error("API Error:", error);
                 counterElement.innerText = "ERR";
-                // hitButton.innerHTML = '<span style="color: #ffeb3b; font-family: \'VT323\', monospace; font-size: 1.5rem;">ＥＲＲＯＲ</span>';
                 counterElement.style.color = "#ffeb3b";
             }
         }
 
-        // Run it once when the page loads
-        // triggerHit();
         reloadHit();
-
-        // Run it again whenever they click the BONK button
         hitButton.addEventListener("click", triggerHit);
     </script>
 
