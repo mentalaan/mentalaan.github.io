@@ -26,7 +26,7 @@
         }
 
         /* === 90s MARQUEE === */
-        marquee {
+        /* marquee {
             width: 100%;
             background-color: #ff71ce;
             color: #2b1055;
@@ -38,8 +38,39 @@
             top: 0;
             border-bottom: 3px solid #01cdfe;
             z-index: 10;
+        } */
+
+        /* === BULLETPROOF CSS MARQUEE === */
+        .vapor-marquee-container {
+            width: 100%;
+            background-color: #ff71ce;
+            color: #2b1055;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            border-bottom: 3px solid #01cdfe;
+            z-index: 10;
+            overflow: hidden;       /* Hides the text outside the box */
+            white-space: nowrap;    /* Forces text onto one line */
         }
 
+        .vapor-marquee-text {
+            display: inline-block;
+            /* 15s is the speed. Lower = faster, Higher = slower */
+            animation: scrollText 15s linear infinite; 
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(100vw); /* Start off-screen Right */
+            }
+            100% {
+                transform: translateX(-100%); /* End off-screen Left */
+            }
+        }
         /* === THE GLOWING SUN & SCANLINES === */
         .sun {
             position: absolute;
@@ -222,9 +253,12 @@
     <!-- <marquee scrollamount="8">
         ＷＥＬＣＯＭＥ ＴＯ ＴＨＥ ＶＩＲＴＵＡＬ ＰＬＡＺＡ // ＥＮＪＯＹ ＹＯＵＲ ＳＴＡＹ // ＮＯＴＨＩＮＧ ＩＳ ＲＥＡＬ
     </marquee> -->
-    <marquee scrollamount="8">
+    <div class="vapor-marquee-container">
+        <div class="vapor-marquee-text">
+    <!-- <marquee scrollamount="50"> -->
         🤘🏻 இப்ப இல்லனா எப்பவும் இல்ல 🤘🏻 காலம் பேசாது, ஆனால் காத்திருந்து பதில் சொல்லும் 🤘🏻
-    </marquee>
+    <!-- </marquee> -->
+        </div></div>
     
 
     <div class="sun"></div>
