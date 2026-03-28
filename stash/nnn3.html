@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- <title>Ｍｅｎｔａｌａｎ // １９９５</title> -->
-    <title>Ｍｅｎｔａｌａｎ // ６９６９</title>
-
+    <title>Ｍｅｎｔａｌａｎ // １９９５</title>
     <style>
         /* === BASE AESTHETIC === */
         html, body {
@@ -33,7 +31,7 @@
             transition: filter 0.1s ease;
         }
 
-        /* === STARFIELD === */
+        /* === NEW: STARFIELD === */
         .stars {
             position: absolute;
             top: 0;
@@ -94,14 +92,15 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* === CRT SCANLINES (CLEANED - NO NOISE) === */
+        /* === ENHANCED CRT SCANLINES & NOISE === */
         .crt::after {
             content: " ";
             display: block;
             position: absolute;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            background-size: 100% 4px, 150px 150px;
             z-index: 100;
             pointer-events: none;
             opacity: 0.8;
@@ -109,8 +108,8 @@
         }
 
         @keyframes scanlines {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100vh; }
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 0 100vh, 150px 150px; }
         }
 
         /* === TYPOGRAPHY === */
@@ -173,13 +172,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* === NEW MARQUEE ICON STYLING === */
-    .marquee-icon {
-        height: 1.6em; /* Slightly taller than the text for prominence */
-        vertical-align: middle;
-        margin-left: 0.5ch; /* Compact spacing */
-        display: inline-block;
-    }
         /* === WINDOWS 95 UI === */
         .win95-window {
             background: #c0c0c0;
@@ -292,7 +284,7 @@
             pointer-events: none;
         }
 
-        /* === THE HORIZON (SUN & DENSER GRID) === */
+        /* === THE HORIZON (SUN, PALMS & GRID) === */
         .sun {
             width: 300px;
             height: 300px;
@@ -308,6 +300,32 @@
             -webkit-mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
             pointer-events: none;
         }
+
+        /* The blue line dividing the grid and the sky */
+        .horizon-glow {
+            position: absolute;
+            bottom: 40vh;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #01cdfe;
+            box-shadow: 0 0 15px 3px #01cdfe, 0 -10px 40px #ff71ce;
+            z-index: 3;
+        }
+
+        /* NEW: Synthwave Palm Trees */
+        .palm {
+            position: absolute;
+            bottom: 39vh; /* Anchors right on the blue horizon line */
+            font-size: 7rem;
+            z-index: 2;
+            pointer-events: none;
+            /* Making emojis look like dark vaporwave silhouettes */
+            color: transparent;  
+            text-shadow: 0 0 0 #090214, 0 0 10px #ff71ce, -2px 0 0 #01cdfe;
+        }
+        .palm-left { left: 8%; transform: scaleX(-1); }
+        .palm-right { right: 8%; }
 
         .grid-container {
             perspective: 600px;
@@ -331,7 +349,7 @@
             background-image: 
                 linear-gradient(to right, #01cdfe 2px, transparent 2px),
                 linear-gradient(to top, #ff71ce 2px, transparent 2px);
-            background-size: 40px 40px; /* Denser grid size */
+            background-size: 60px 60px;
             transform: rotateX(75deg);
             animation: moveGrid 3s linear infinite;
             box-shadow: 0 0 20px #01cdfe inset;
@@ -340,7 +358,7 @@
         /* === ANIMATIONS === */
         @keyframes moveGrid {
             0% { transform: rotateX(75deg) translateY(0); }
-            100% { transform: rotateX(75deg) translateY(40px); } /* Loop matches the new grid size perfectly */
+            100% { transform: rotateX(75deg) translateY(60px); }
         }
 
         @keyframes float {
@@ -359,21 +377,24 @@
             .popup-window { width: 200px; }
             .vapor-number { font-size: 2rem; }
             .vapor-marquee-container { font-size: 1rem; }
+            .palm { font-size: 4rem; bottom: 39.5vh; }
         }
     </style>
 </head>
 <body class="crt">
 
-    <!-- <div class="vapor-marquee-container">
-        <div class="vapor-marquee-text">
-        // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ //
-    </div></div> -->
     <div class="vapor-marquee-container">
-    <div class="vapor-marquee-text">
-    * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> *
-</div></div>
+        <div class="vapor-marquee-text">
+        ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ
+    </div></div>
+
+    <div class="stars"></div>
 
     <div class="sun"></div>
+    <div class="horizon-glow"></div>
+    
+    <div class="palm palm-left">🌴</div>
+    <div class="palm palm-right">🌴</div>
     
     <div class="grid-container">
         <div class="grid"></div>

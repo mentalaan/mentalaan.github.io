@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- <title>Ｍｅｎｔａｌａｎ // １９９５</title> -->
-    <title>Ｍｅｎｔａｌａｎ // ６９６９</title>
-
+    <title>Ｍｅｎｔａｌａｎ // １９９５</title>
     <style>
         /* === BASE AESTHETIC === */
         html, body {
@@ -16,12 +14,11 @@
             height: 100dvh;
             overflow: hidden;
             touch-action: none;
-            background-color: #1a0b2e;
         }
 
         body {
-            /* Deeper synthwave sky gradient */
-            background: linear-gradient(180deg, #090214 0%, #1a0b2e 40%, #52154e 60%);
+            background: linear-gradient(180deg, #1a0b2e 0%, #2b1055 50%, #7597de 100%);
+            background-attachment: fixed;
             color: #01cdfe;
             font-family: 'Courier New', Courier, monospace;
             text-align: center;
@@ -33,42 +30,19 @@
             transition: filter 0.1s ease;
         }
 
-        /* === STARFIELD === */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60vh;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .stars::after {
-            content: "";
-            position: absolute;
-            top: 10px; left: 10px;
-            width: 2px; height: 2px;
-            background: white;
-            /* Generating CSS stars using box-shadow */
-            box-shadow: 
-                10vw 5vh #fff, 20vw 15vh #fff, 30vw 35vh #fff, 40vw 2vh #fff, 
-                50vw 45vh #fff, 60vw 12vh #fff, 70vw 25vh #fff, 80vw 4vh #fff, 
-                90vw 30vh #fff, 15vw 50vh #fff, 35vw 20vh #fff, 55vw 5vh #fff,
-                75vw 40vh #fff, 85vw 15vh #fff, 95vw 25vh #fff,
-                25vw 25vh #ff71ce, 45vw 35vh #01cdfe, 65vw 15vh #fffb96, 85vw 5vh #ff71ce;
-            animation: twinkle 3s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-
         /* === RANDOMIZED GLOBAL EFFECTS ON CLOSE === */
         body.effect-glitch {
             animation: pageGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both;
             filter: hue-rotate(90deg) contrast(150%) invert(10%);
+        }
+
+        body.effect-crt-flicker {
+            animation: crtFlicker 0.3s ease-in-out both;
+        }
+
+        body.effect-invert-wobble {
+            animation: wobble 0.3s ease-in-out both;
+            filter: invert(100%) sepia(100%) hue-rotate(180deg);
         }
 
         body.effect-blur-shake {
@@ -85,6 +59,22 @@
             100% { transform: translate(0) }
         }
 
+        @keyframes crtFlicker {
+            0% { opacity: 1; filter: brightness(1); }
+            25% { opacity: 0.3; filter: brightness(3) hue-rotate(45deg); }
+            50% { opacity: 0.8; filter: brightness(0.5); }
+            75% { opacity: 0.1; filter: brightness(4) invert(50%); }
+            100% { opacity: 1; filter: brightness(1); }
+        }
+
+        @keyframes wobble {
+            0% { transform: skewX(0deg); }
+            25% { transform: skewX(20deg) scaleY(0.9); }
+            50% { transform: skewX(-20deg) scaleY(1.1); }
+            75% { transform: skewX(10deg) scaleY(0.95); }
+            100% { transform: skewX(0deg); }
+        }
+
         @keyframes shake {
             0% { transform: translate(0, 0) rotate(0deg); }
             20% { transform: translate(-25px, 15px) rotate(-5deg); }
@@ -94,7 +84,7 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* === CRT SCANLINES (CLEANED - NO NOISE) === */
+        /* === CRT SCANLINE OVERLAY === */
         .crt::after {
             content: " ";
             display: block;
@@ -104,7 +94,6 @@
             background-size: 100% 4px;
             z-index: 100;
             pointer-events: none;
-            opacity: 0.8;
             animation: scanlines 10s linear infinite;
         }
 
@@ -119,7 +108,6 @@
             z-index: 10;
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
-            margin-top: -10vh; /* Lifted slightly to balance scene */
         }
 
         h1 {
@@ -173,13 +161,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* === NEW MARQUEE ICON STYLING === */
-    .marquee-icon {
-        height: 1.6em; /* Slightly taller than the text for prominence */
-        vertical-align: middle;
-        margin-left: 0.5ch; /* Compact spacing */
-        display: inline-block;
-    }
         /* === WINDOWS 95 UI === */
         .win95-window {
             background: #c0c0c0;
@@ -292,7 +273,7 @@
             pointer-events: none;
         }
 
-        /* === THE HORIZON (SUN & DENSER GRID) === */
+        /* === THE HORIZON (SUN & GRID) === */
         .sun {
             width: 300px;
             height: 300px;
@@ -309,17 +290,25 @@
             pointer-events: none;
         }
 
+        .horizon-glow {
+            position: absolute;
+            bottom: 40vh;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #01cdfe;
+            box-shadow: 0 0 20px 5px #01cdfe, 0 -10px 40px #ff71ce;
+            z-index: 3;
+        }
+
         .grid-container {
             perspective: 600px;
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 40vh; /* Connects right at the horizon line */
+            height: 40vh;
             z-index: 2;
             pointer-events: none;
-            /* Fade out the back of the grid so it blends into the horizon */
-            mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
         }
 
         .grid {
@@ -331,16 +320,24 @@
             background-image: 
                 linear-gradient(to right, #01cdfe 2px, transparent 2px),
                 linear-gradient(to top, #ff71ce 2px, transparent 2px);
-            background-size: 40px 40px; /* Denser grid size */
+            background-size: 60px 60px;
             transform: rotateX(75deg);
             animation: moveGrid 3s linear infinite;
             box-shadow: 0 0 20px #01cdfe inset;
         }
 
+        .grid-fade {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #2b1055 0%, transparent 40%);
+        }
+
         /* === ANIMATIONS === */
         @keyframes moveGrid {
             0% { transform: rotateX(75deg) translateY(0); }
-            100% { transform: rotateX(75deg) translateY(40px); } /* Loop matches the new grid size perfectly */
+            100% { transform: rotateX(75deg) translateY(60px); }
         }
 
         @keyframes float {
@@ -351,7 +348,7 @@
 
         /* === MOBILE RESPONSIVENESS === */
         @media screen and (max-width: 768px) {
-            .text-container { margin-top: -5vh; }
+            .text-container { margin-top: 50px; }
             h1 { font-size: 2.2rem; letter-spacing: 5px; text-shadow: 2px 2px 0px #ff71ce, 0 0 10px #ff71ce; }
             h2 { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 20px; }
             .sun { width: 220px; height: 220px; bottom: 30vh; }
@@ -364,19 +361,17 @@
 </head>
 <body class="crt">
 
-    <!-- <div class="vapor-marquee-container">
-        <div class="vapor-marquee-text">
-        // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ //
-    </div></div> -->
     <div class="vapor-marquee-container">
-    <div class="vapor-marquee-text">
-    * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> *
-</div></div>
+        <div class="vapor-marquee-text">
+        ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ
+    </div></div>
 
     <div class="sun"></div>
+    <div class="horizon-glow"></div>
     
     <div class="grid-container">
         <div class="grid"></div>
+        <div class="grid-fade"></div>
     </div>
 
     <div class="text-container">
@@ -495,15 +490,20 @@
         // --- RANDOM PAGE EFFECTS ---
         const effects = [
             'effect-glitch', 
+            // 'effect-crt-flicker', 
+            // 'effect-invert-wobble', 
             'effect-blur-shake'
         ];
 
         function triggerRandomEffect() {
+            // Clean up any existing effects if buttons are clicked too fast
             effects.forEach(eff => document.body.classList.remove(eff));
 
+            // Pick a random effect
             const randomEffect = effects[Math.floor(Math.random() * effects.length)];
             document.body.classList.add(randomEffect);
             
+            // Remove the specific class after the animation finishes (300ms)
             setTimeout(() => {
                 document.body.classList.remove(randomEffect);
             }, 300);
@@ -597,6 +597,7 @@
             triggerPopupCascade();
         });
 
+        // Initialize fetch
         fetchHitCount();
     </script>
 </body>

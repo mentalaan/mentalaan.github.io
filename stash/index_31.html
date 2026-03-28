@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- <title>Ｍｅｎｔａｌａｎ // １９９５</title> -->
-    <title>Ｍｅｎｔａｌａｎ // ６９６９</title>
-
+    <title>ＶＡＰＯＲＷＡＶＥ // １９９５</title>
     <style>
         /* === BASE AESTHETIC === */
         html, body {
@@ -16,12 +14,11 @@
             height: 100dvh;
             overflow: hidden;
             touch-action: none;
-            background-color: #1a0b2e;
         }
 
         body {
-            /* Deeper synthwave sky gradient */
-            background: linear-gradient(180deg, #090214 0%, #1a0b2e 40%, #52154e 60%);
+            background: linear-gradient(180deg, #1a0b2e 0%, #2b1055 50%, #7597de 100%);
+            background-attachment: fixed;
             color: #01cdfe;
             font-family: 'Courier New', Courier, monospace;
             text-align: center;
@@ -30,71 +27,9 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            transition: filter 0.1s ease;
         }
 
-        /* === STARFIELD === */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60vh;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .stars::after {
-            content: "";
-            position: absolute;
-            top: 10px; left: 10px;
-            width: 2px; height: 2px;
-            background: white;
-            /* Generating CSS stars using box-shadow */
-            box-shadow: 
-                10vw 5vh #fff, 20vw 15vh #fff, 30vw 35vh #fff, 40vw 2vh #fff, 
-                50vw 45vh #fff, 60vw 12vh #fff, 70vw 25vh #fff, 80vw 4vh #fff, 
-                90vw 30vh #fff, 15vw 50vh #fff, 35vw 20vh #fff, 55vw 5vh #fff,
-                75vw 40vh #fff, 85vw 15vh #fff, 95vw 25vh #fff,
-                25vw 25vh #ff71ce, 45vw 35vh #01cdfe, 65vw 15vh #fffb96, 85vw 5vh #ff71ce;
-            animation: twinkle 3s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* === RANDOMIZED GLOBAL EFFECTS ON CLOSE === */
-        body.effect-glitch {
-            animation: pageGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both;
-            filter: hue-rotate(90deg) contrast(150%) invert(10%);
-        }
-
-        body.effect-blur-shake {
-            animation: shake 0.3s linear both;
-            filter: blur(6px) contrast(200%) saturate(300%);
-        }
-
-        @keyframes pageGlitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-10px, 10px) }
-            40% { transform: translate(-10px, -10px) }
-            60% { transform: translate(10px, 10px) }
-            80% { transform: translate(10px, -10px) }
-            100% { transform: translate(0) }
-        }
-
-        @keyframes shake {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            20% { transform: translate(-25px, 15px) rotate(-5deg); }
-            40% { transform: translate(25px, -15px) rotate(5deg); }
-            60% { transform: translate(-25px, -25px) rotate(-5deg); }
-            80% { transform: translate(25px, 25px) rotate(5deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
-        }
-
-        /* === CRT SCANLINES (CLEANED - NO NOISE) === */
+        /* === CRT SCANLINE OVERLAY === */
         .crt::after {
             content: " ";
             display: block;
@@ -104,7 +39,6 @@
             background-size: 100% 4px;
             z-index: 100;
             pointer-events: none;
-            opacity: 0.8;
             animation: scanlines 10s linear infinite;
         }
 
@@ -118,8 +52,6 @@
             position: relative;
             z-index: 10;
             animation: float 6s ease-in-out infinite;
-            pointer-events: none;
-            margin-top: -10vh; /* Lifted slightly to balance scene */
         }
 
         h1 {
@@ -173,13 +105,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* === NEW MARQUEE ICON STYLING === */
-    .marquee-icon {
-        height: 1.6em; /* Slightly taller than the text for prominence */
-        vertical-align: middle;
-        margin-left: 0.5ch; /* Compact spacing */
-        display: inline-block;
-    }
         /* === WINDOWS 95 UI === */
         .win95-window {
             background: #c0c0c0;
@@ -189,21 +114,15 @@
             border-bottom: 3px solid #808080;
             padding: 2px;
             width: 350px;
-            position: absolute;
-            z-index: 50;
+            position: relative;
+            z-index: 10;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
             transform-origin: center;
         }
 
-        #visitor-window {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
         .win95-window.closing {
-            transform: scale(0.8) !important;
+            transform: scale(0.8);
             opacity: 0;
             pointer-events: none;
         }
@@ -219,12 +138,6 @@
             justify-content: space-between;
             align-items: center;
             letter-spacing: 1px;
-            cursor: grab;
-            user-select: none;
-        }
-
-        .win95-titlebar:active {
-            cursor: grabbing;
         }
 
         .win95-close {
@@ -274,6 +187,8 @@
 
         /* === POPUP STYLES === */
         .popup-window {
+            position: absolute;
+            z-index: 50;
             width: 250px;
             animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
@@ -289,10 +204,9 @@
             border: 2px solid #808080;
             box-sizing: border-box;
             display: block;
-            pointer-events: none;
         }
 
-        /* === THE HORIZON (SUN & DENSER GRID) === */
+        /* === THE HORIZON (SUN & GRID) === */
         .sun {
             width: 300px;
             height: 300px;
@@ -306,7 +220,17 @@
             box-shadow: 0 0 80px #ff71ce, 0 0 150px rgba(255, 113, 206, 0.4);
             mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
             -webkit-mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
-            pointer-events: none;
+        }
+
+        .horizon-glow {
+            position: absolute;
+            bottom: 40vh;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #01cdfe;
+            box-shadow: 0 0 20px 5px #01cdfe, 0 -10px 40px #ff71ce;
+            z-index: 3;
         }
 
         .grid-container {
@@ -314,12 +238,8 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 40vh; /* Connects right at the horizon line */
+            height: 40vh;
             z-index: 2;
-            pointer-events: none;
-            /* Fade out the back of the grid so it blends into the horizon */
-            mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
         }
 
         .grid {
@@ -331,16 +251,24 @@
             background-image: 
                 linear-gradient(to right, #01cdfe 2px, transparent 2px),
                 linear-gradient(to top, #ff71ce 2px, transparent 2px);
-            background-size: 40px 40px; /* Denser grid size */
+            background-size: 60px 60px;
             transform: rotateX(75deg);
             animation: moveGrid 3s linear infinite;
             box-shadow: 0 0 20px #01cdfe inset;
         }
 
+        .grid-fade {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #2b1055 0%, transparent 40%);
+        }
+
         /* === ANIMATIONS === */
         @keyframes moveGrid {
             0% { transform: rotateX(75deg) translateY(0); }
-            100% { transform: rotateX(75deg) translateY(40px); } /* Loop matches the new grid size perfectly */
+            100% { transform: rotateX(75deg) translateY(60px); }
         }
 
         @keyframes float {
@@ -351,12 +279,12 @@
 
         /* === MOBILE RESPONSIVENESS === */
         @media screen and (max-width: 768px) {
-            .text-container { margin-top: -5vh; }
+            .text-container { margin-top: 50px; }
             h1 { font-size: 2.2rem; letter-spacing: 5px; text-shadow: 2px 2px 0px #ff71ce, 0 0 10px #ff71ce; }
             h2 { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 20px; }
             .sun { width: 220px; height: 220px; bottom: 30vh; }
             .win95-window { width: 85%; max-width: 350px; }
-            .popup-window { width: 200px; }
+            .popup-window { width: 200px; } /* Smaller popups on mobile */
             .vapor-number { font-size: 2rem; }
             .vapor-marquee-container { font-size: 1rem; }
         }
@@ -364,19 +292,17 @@
 </head>
 <body class="crt">
 
-    <!-- <div class="vapor-marquee-container">
-        <div class="vapor-marquee-text">
-        // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ //
-    </div></div> -->
     <div class="vapor-marquee-container">
-    <div class="vapor-marquee-text">
-    * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> *
-</div></div>
+        <div class="vapor-marquee-text">
+        ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ
+    </div></div>
 
     <div class="sun"></div>
+    <div class="horizon-glow"></div>
     
     <div class="grid-container">
         <div class="grid"></div>
+        <div class="grid-fade"></div>
     </div>
 
     <div class="text-container">
@@ -385,12 +311,12 @@
     </div>
 
     <div class="win95-window" id="visitor-window">
-        <div class="win95-titlebar" id="visitor-titlebar">
+        <div class="win95-titlebar">
             <span>visitor_log.exe</span>
             <div class="win95-close" id="close-btn" aria-label="Close window">X</div>
         </div>
         <div class="win95-content">
-            <span style="font-weight: bold;">VISITOR ID:</span>
+            <span style="font-weight: bold;">VISITORS:</span>
             <span id="visitor-count" class="vapor-number">L0AD1NG...</span>
         </div>
     </div>
@@ -398,79 +324,6 @@
     <script>
         // ⚠️ CHANGE THIS URL to your actual Render backend URL
         const backendUrl = "https://mentalan-backend.onrender.com/visits";
-
-        // --- Z-INDEX MANAGEMENT ---
-        let currentZIndex = 50;
-        function bringToFront(element) {
-            currentZIndex++;
-            element.style.zIndex = currentZIndex;
-        }
-
-        // --- DRAG LOGIC ---
-        function makeDraggable(element, handle) {
-            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-            handle.onmousedown = dragMouseDown;
-            handle.ontouchstart = dragTouchStart;
-
-            function dragMouseDown(e) {
-                e.preventDefault();
-                bringToFront(element);
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                document.onmouseup = closeDragElement;
-                document.onmousemove = elementDrag;
-            }
-
-            function dragTouchStart(e) {
-                bringToFront(element);
-                pos3 = e.touches[0].clientX;
-                pos4 = e.touches[0].clientY;
-                document.ontouchend = closeDragElement;
-                document.ontouchmove = elementDragTouch;
-            }
-
-            function elementDrag(e) {
-                e.preventDefault();
-                pos1 = pos3 - e.clientX;
-                pos2 = pos4 - e.clientY;
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                
-                if (element.style.transform.includes('translate')) {
-                    element.style.transform = 'none';
-                }
-
-                element.style.top = (element.offsetTop - pos2) + "px";
-                element.style.left = (element.offsetLeft - pos1) + "px";
-            }
-
-            function elementDragTouch(e) {
-                pos1 = pos3 - e.touches[0].clientX;
-                pos2 = pos4 - e.touches[0].clientY;
-                pos3 = e.touches[0].clientX;
-                pos4 = e.touches[0].clientY;
-                
-                if (element.style.transform.includes('translate')) {
-                    element.style.transform = 'none';
-                }
-
-                element.style.top = (element.offsetTop - pos2) + "px";
-                element.style.left = (element.offsetLeft - pos1) + "px";
-            }
-
-            function closeDragElement() {
-                document.onmouseup = null;
-                document.onmousemove = null;
-                document.ontouchend = null;
-                document.ontouchmove = null;
-            }
-            
-            element.onmousedown = () => bringToFront(element);
-            element.ontouchstart = () => bringToFront(element);
-        }
-
-        makeDraggable(document.getElementById("visitor-window"), document.getElementById("visitor-titlebar"));
 
         // --- FETCH LOGIC ---
         async function fetchHitCount() {
@@ -492,30 +345,13 @@
             }
         }
 
-        // --- RANDOM PAGE EFFECTS ---
-        const effects = [
-            'effect-glitch', 
-            'effect-blur-shake'
-        ];
-
-        function triggerRandomEffect() {
-            effects.forEach(eff => document.body.classList.remove(eff));
-
-            const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-            document.body.classList.add(randomEffect);
-            
-            setTimeout(() => {
-                document.body.classList.remove(randomEffect);
-            }, 300);
-        }
-
         // --- POPUP LOGIC ---
         const gifUrls = [
-            "gifs/mentalan.gif", 
-            "gifs/mentalan_2.gif", 
-            "gifs/vj.gif", 
-            "gifs/whistle.gif", 
-            "gifs/budweiser.gif"  
+            "gifs/mentalan.gif", // Windows 95 maze
+            "gifs/mentalan_2.gif", // Statues / Grid
+            "gifs/vj.gif", // Dolphin
+            "gifs/whistle.gif", // Error loop
+            "gifs/budweiser.gif"  // Synthwave driving
         ];
 
         const popupTitles = [
@@ -526,10 +362,12 @@
             "VIRUS_DETECTED.exe"
         ];
 
-        let activeOrPendingPopups = 0; 
+        let activeOrPendingPopups = 0; // Tracks popups to trigger restart
 
         function triggerPopupCascade() {
-            const delays = [500, 1000, 1500, 2200, 2600]; 
+            const delays = [500, 1000, 1500, 2200, 2600]; // Times when popups will appear
+            
+            // Add the number of new popups we are about to spawn to the tracker
             activeOrPendingPopups += delays.length; 
 
             delays.forEach(delay => {
@@ -555,25 +393,21 @@
                     <div class="win95-close popup-close">X</div>
                 </div>
                 <div style="padding: 10px; background: #c0c0c0;">
-                    <img src="${randomGif}" class="popup-img" alt="Vaporwave GIF" onerror="this.src='https://via.placeholder.com/200x150?text=GIF+MISSING'">
+                    <img src="${randomGif}" class="popup-img" alt="Vaporwave GIF">
                 </div>
             `;
 
             document.body.appendChild(popup);
 
-            makeDraggable(popup, popup.querySelector('.win95-titlebar'));
-            bringToFront(popup);
-
             const closeBtn = popup.querySelector('.popup-close');
             closeBtn.addEventListener('click', () => {
                 popup.classList.add("closing");
                 
-                triggerRandomEffect();
-
                 setTimeout(() => {
                     popup.remove();
-                    activeOrPendingPopups--; 
+                    activeOrPendingPopups--; // Subtract from tracker when fully closed
                     
+                    // If all popups from this wave are gone, trigger a new wave!
                     if (activeOrPendingPopups === 0) {
                         triggerPopupCascade();
                     }
@@ -587,16 +421,15 @@
 
         mainCloseBtn.addEventListener("click", () => {
             windowElement.classList.add("closing");
-            
-            triggerRandomEffect();
-
             setTimeout(() => {
                 windowElement.style.display = "none";
             }, 300);
 
+            // Start the infinite loop
             triggerPopupCascade();
         });
 
+        // Initialize fetch
         fetchHitCount();
     </script>
 </body>
