@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- <title>Ｍｅｎｔａｌａｎ // １９９５</title> -->
     <title>Ｍｅｎｔａｌａｎ // ６９６９</title>
 
     <style>
@@ -19,6 +20,7 @@
         }
 
         body {
+            /* Deeper synthwave sky gradient */
             background: linear-gradient(180deg, #090214 0%, #1a0b2e 40%, #52154e 60%);
             color: #01cdfe;
             font-family: 'Courier New', Courier, monospace;
@@ -48,6 +50,7 @@
             top: 10px; left: 10px;
             width: 2px; height: 2px;
             background: white;
+            /* Generating CSS stars using box-shadow */
             box-shadow: 
                 10vw 5vh #fff, 20vw 15vh #fff, 30vw 35vh #fff, 40vw 2vh #fff, 
                 50vw 45vh #fff, 60vw 12vh #fff, 70vw 25vh #fff, 80vw 4vh #fff, 
@@ -91,7 +94,7 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* === CRT SCANLINES === */
+        /* === CRT SCANLINES (CLEANED - NO NOISE) === */
         .crt::after {
             content: " ";
             display: block;
@@ -116,7 +119,7 @@
             z-index: 10;
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
-            margin-top: -10vh;
+            margin-top: -10vh; /* Lifted slightly to balance scene */
         }
 
         h1 {
@@ -170,13 +173,13 @@
             100% { transform: translateX(-100%); }
         }
 
-        .marquee-icon {
-            height: 1.6em;
-            vertical-align: middle;
-            margin-left: 0.5ch;
-            display: inline-block;
-        }
-
+        /* === NEW MARQUEE ICON STYLING === */
+    .marquee-icon {
+        height: 1.6em; /* Slightly taller than the text for prominence */
+        vertical-align: middle;
+        margin-left: 0.5ch; /* Compact spacing */
+        display: inline-block;
+    }
         /* === WINDOWS 95 UI === */
         .win95-window {
             background: #c0c0c0;
@@ -260,36 +263,13 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        /* RESTORED VAPOR NUMBER STYLE */
         .vapor-number {
             font-size: 3rem;
             font-weight: bold;
             color: #ff00ff;
             text-shadow: 2px 2px #00ffff;
-            display: block; /* Restored to block to fix visitor log layout */
+            display: block;
             margin-top: 10px;
-        }
-
-        /* === WIN95 BUTTON === */
-        .win95-button {
-            background: #c0c0c0;
-            border-top: 3px solid #ffffff;
-            border-left: 3px solid #ffffff;
-            border-right: 3px solid #000000;
-            border-bottom: 3px solid #000000;
-            padding: 10px 20px;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            cursor: pointer;
-            transition: none;
-        }
-
-        .win95-button:active {
-            border-top: 3px solid #000000;
-            border-left: 3px solid #000000;
-            border-right: 3px solid #ffffff;
-            border-bottom: 3px solid #ffffff;
-            padding: 12px 18px 8px 22px; 
         }
 
         /* === POPUP STYLES === */
@@ -306,12 +286,13 @@
         .popup-img {
             width: 100%;
             height: auto;
+            border: 2px solid #808080;
             box-sizing: border-box;
             display: block;
             pointer-events: none;
         }
 
-        /* === THE HORIZON === */
+        /* === THE HORIZON (SUN & DENSER GRID) === */
         .sun {
             width: 300px;
             height: 300px;
@@ -333,9 +314,10 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 40vh; 
+            height: 40vh; /* Connects right at the horizon line */
             z-index: 2;
             pointer-events: none;
+            /* Fade out the back of the grid so it blends into the horizon */
             mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
         }
@@ -349,15 +331,16 @@
             background-image: 
                 linear-gradient(to right, #01cdfe 2px, transparent 2px),
                 linear-gradient(to top, #ff71ce 2px, transparent 2px);
-            background-size: 40px 40px; 
+            background-size: 40px 40px; /* Denser grid size */
             transform: rotateX(75deg);
             animation: moveGrid 3s linear infinite;
             box-shadow: 0 0 20px #01cdfe inset;
         }
 
+        /* === ANIMATIONS === */
         @keyframes moveGrid {
             0% { transform: rotateX(75deg) translateY(0); }
-            100% { transform: rotateX(75deg) translateY(40px); } 
+            100% { transform: rotateX(75deg) translateY(40px); } /* Loop matches the new grid size perfectly */
         }
 
         @keyframes float {
@@ -381,7 +364,16 @@
 </head>
 <body class="crt">
 
-    <div class="vapor-marquee-container">
+    <!-- <div class="vapor-marquee-container">
+        <div class="vapor-marquee-text">
+        // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ //
+    </div></div> -->
+    <!-- <div class="vapor-marquee-container">
+    <div class="vapor-marquee-text">
+    * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> * ＶＯＴＥ ＦＯＲ <img [p] src="/images/whistle.png" class="marquee-icon"> *
+</div></div> -->
+
+<div class="vapor-marquee-container">
         <div class="vapor-marquee-text">
             * ＶＯＴＥ ＦＯＲ <img src="/images/whistle.png" class="marquee-icon"> 
             * ＶＯＴＥ ＦＯＲ <img src="/images/whistle.png" class="marquee-icon"> 
@@ -393,6 +385,7 @@
     </div>
 
     <div class="stars"></div>
+
     <div class="sun"></div>
     
     <div class="grid-container">
@@ -415,25 +408,9 @@
         </div>
     </div>
 
-    <div class="win95-window popup-window" id="bonk-window" style="display: none;">
-        <div class="win95-titlebar" id="bonk-titlebar">
-            <span>mentalan_bonk.exe</span>
-            <div class="win95-close" id="bonk-close-btn" aria-label="Close window">X</div>
-        </div>
-        <div class="win95-content" style="text-align: center;">
-            <img id="bonk-image" src="/images/bonk0.png" class="popup-img" alt="Bonk">
-            <br>
-            <div style="margin-top: 15px; font-weight: bold; font-size: 1.2rem;">
-                TIMES RANDOM MENTALANS BONKED:<br>
-                <button class="win95-button vapor-number" id="bonk-btn" style="width: 100%; font-size: 2.5rem; margin-top: 10px; display: block;">...</button>
-            </div>
-        </div>
-    </div>
-
     <script>
+        // ⚠️ CHANGE THIS URL to your actual Render backend URL
         const backendUrl = "https://mentalan-backend.onrender.com/visits";
-        const bonkFetchUrl = "https://mentalan-backend.onrender.com/bonks";   // GET for initial count
-        const bonkIncrementUrl = "https://mentalan-backend.onrender.com/counter"; // GET to increment count
 
         // --- Z-INDEX MANAGEMENT ---
         let currentZIndex = 50;
@@ -473,7 +450,7 @@
                 pos3 = e.clientX;
                 pos4 = e.clientY;
                 
-                if (element.style.transform && element.style.transform.includes('translate')) {
+                if (element.style.transform.includes('translate')) {
                     element.style.transform = 'none';
                 }
 
@@ -487,7 +464,7 @@
                 pos3 = e.touches[0].clientX;
                 pos4 = e.touches[0].clientY;
                 
-                if (element.style.transform && element.style.transform.includes('translate')) {
+                if (element.style.transform.includes('translate')) {
                     element.style.transform = 'none';
                 }
 
@@ -508,19 +485,6 @@
 
         makeDraggable(document.getElementById("visitor-window"), document.getElementById("visitor-titlebar"));
 
-        // Initialize and position the Bonk Window randomly
-        function initBonkWindow() {
-            const bonkWindow = document.getElementById("bonk-window");
-            const maxLeft = window.innerWidth - (window.innerWidth < 768 ? 200 : 350); 
-            const maxTop = window.innerHeight - 350;
-            
-            bonkWindow.style.left = Math.max(0, Math.floor(Math.random() * maxLeft)) + "px";
-            bonkWindow.style.top = Math.max(0, Math.floor(Math.random() * maxTop)) + "px";
-            bonkWindow.style.display = "block";
-            
-            makeDraggable(bonkWindow, document.getElementById("bonk-titlebar"));
-        }
-
         // --- FETCH LOGIC ---
         async function fetchHitCount() {
             const counterElement = document.getElementById("visitor-count");
@@ -532,71 +496,31 @@
                     counterElement.innerText = data.count;
                 }, 800);
             } catch (error) {
-                counterElement.innerText = "ERR_404";
-                counterElement.style.color = "#ff0000"; 
-            }
-        }
-
-        async function fetchBonkCount() {
-            const bonkBtn = document.getElementById("bonk-btn");
-            try {
-                // Fetch current count via GET /bonks
-                const response = await fetch(bonkFetchUrl);
-                if (!response.ok) throw new Error("Network response was not ok");
-                const data = await response.json();
+                console.error("Error fetching the counter:", error);
                 setTimeout(() => {
-                    bonkBtn.innerText = data.count || 0;
+                    counterElement.innerText = "ERR_404";
+                    counterElement.style.color = "#ff0000"; 
+                    counterElement.style.textShadow = "2px 2px #000";
                 }, 800);
-            } catch (error) {
-                bonkBtn.innerText = "ERR";
-                bonkBtn.style.color = "#ff0000"; 
             }
         }
 
         // --- RANDOM PAGE EFFECTS ---
-        const effects = ['effect-glitch', 'effect-blur-shake'];
+        const effects = [
+            'effect-glitch', 
+            'effect-blur-shake'
+        ];
 
         function triggerRandomEffect() {
             effects.forEach(eff => document.body.classList.remove(eff));
+
             const randomEffect = effects[Math.floor(Math.random() * effects.length)];
             document.body.classList.add(randomEffect);
+            
             setTimeout(() => {
                 document.body.classList.remove(randomEffect);
             }, 300);
         }
-
-        // --- BONK IMAGE SWAP & BUTTON LOGIC ---
-        document.getElementById("bonk-btn").addEventListener("click", async () => {
-            const bonkImage = document.getElementById("bonk-image");
-            const bonkBtn = document.getElementById("bonk-btn");
-            
-            // 1. Swap the image to bonk1.png
-            bonkImage.src = "/images/bonk1.png";
-            
-            // 2. Add visual effects
-            triggerRandomEffect();
-
-            // 3. Swap back to bonk0.png after 300 milliseconds
-            setTimeout(() => {
-                bonkImage.src = "/images/bonk0.png";
-            }, 300);
-
-            // 4. Update Counter Logic
-            let currentCount = parseInt(bonkBtn.innerText) || 0;
-            bonkBtn.innerText = currentCount + 1; // Optimistic update on the button
-
-            try {
-                // GET request to /counter to increment
-                const response = await fetch(bonkIncrementUrl); 
-                if (!response.ok) throw new Error("Failed to send bonk");
-                const data = await response.json();
-                if (data.count !== undefined) {
-                    bonkBtn.innerText = data.count; // Ensure sync with server
-                }
-            } catch (error) {
-                console.error("Error sending bonk:", error);
-            }
-        });
 
         // --- POPUP LOGIC ---
         const gifUrls = [
@@ -620,7 +544,10 @@
         function triggerPopupCascade() {
             const delays = [500, 1000, 1500, 2200, 2600]; 
             activeOrPendingPopups += delays.length; 
-            delays.forEach(delay => setTimeout(createRandomPopup, delay));
+
+            delays.forEach(delay => {
+                setTimeout(createRandomPopup, delay);
+            });
         }
 
         function createRandomPopup() {
@@ -646,16 +573,20 @@
             `;
 
             document.body.appendChild(popup);
+
             makeDraggable(popup, popup.querySelector('.win95-titlebar'));
             bringToFront(popup);
 
             const closeBtn = popup.querySelector('.popup-close');
             closeBtn.addEventListener('click', () => {
                 popup.classList.add("closing");
+                
                 triggerRandomEffect();
+
                 setTimeout(() => {
                     popup.remove();
                     activeOrPendingPopups--; 
+                    
                     if (activeOrPendingPopups === 0) {
                         triggerPopupCascade();
                     }
@@ -663,30 +594,23 @@
             });
         }
 
-        // --- UI INTERACTION LOGIC (CLOSING WINDOWS) ---
-        document.getElementById("close-btn").addEventListener("click", () => {
-            const windowElement = document.getElementById("visitor-window");
+        // --- UI INTERACTION LOGIC ---
+        const mainCloseBtn = document.getElementById("close-btn");
+        const windowElement = document.getElementById("visitor-window");
+
+        mainCloseBtn.addEventListener("click", () => {
             windowElement.classList.add("closing");
+            
             triggerRandomEffect();
+
             setTimeout(() => {
                 windowElement.style.display = "none";
             }, 300);
+
             triggerPopupCascade();
         });
 
-        document.getElementById("bonk-close-btn").addEventListener("click", () => {
-            const bonkWindow = document.getElementById("bonk-window");
-            bonkWindow.classList.add("closing");
-            triggerRandomEffect();
-            setTimeout(() => {
-                bonkWindow.style.display = "none";
-            }, 300);
-        });
-
-        // Initialize Everything
-        initBonkWindow();
         fetchHitCount();
-        fetchBonkCount();
     </script>
 </body>
 </html>

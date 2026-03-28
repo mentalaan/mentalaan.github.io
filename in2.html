@@ -260,14 +260,12 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        /* RESTORED VAPOR NUMBER STYLE */
         .vapor-number {
             font-size: 3rem;
             font-weight: bold;
             color: #ff00ff;
             text-shadow: 2px 2px #00ffff;
-            display: block; /* Restored to block to fix visitor log layout */
-            margin-top: 10px;
+            display: inline-block;
         }
 
         /* === WIN95 BUTTON === */
@@ -425,13 +423,14 @@
             <br>
             <div style="margin-top: 15px; font-weight: bold; font-size: 1.2rem;">
                 TIMES RANDOM MENTALANS BONKED:<br>
-                <button class="win95-button vapor-number" id="bonk-btn" style="width: 100%; font-size: 2.5rem; margin-top: 10px; display: block;">...</button>
+                <button class="win95-button vapor-number" id="bonk-btn" style="width: 100%; font-size: 2.5rem; margin-top: 10px;">...</button>
             </div>
         </div>
     </div>
 
     <script>
         const backendUrl = "https://mentalan-backend.onrender.com/visits";
+        // Updated API Endpoints
         const bonkFetchUrl = "https://mentalan-backend.onrender.com/bonks";   // GET for initial count
         const bonkIncrementUrl = "https://mentalan-backend.onrender.com/counter"; // GET to increment count
 
