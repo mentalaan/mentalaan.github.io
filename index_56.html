@@ -189,10 +189,8 @@
             position: absolute;
             z-index: 50;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
-            /* Updated transition: target scale instead of transform */
-            transition: scale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
             transform-origin: center;
-            scale: 1; /* Define initial state */
         }
 
         #visitor-window {
@@ -202,9 +200,8 @@
         }
 
         .win95-window.closing {
-            /* Use the independent scale property so it doesn't overwrite translate */
-            scale: 0.8 !important; 
-            opacity: 0 !important;
+            transform: scale(0.8) !important;
+            opacity: 0;
             pointer-events: none;
         }
 
@@ -427,7 +424,7 @@
             <img id="bonk-image" src="/images/bonk0.png" class="popup-img" alt="Bonk">
             <br>
             <div style="margin-top: 15px; font-weight: bold; font-size: 1.2rem;">
-                TIMES BONKED:<br>
+                TIMES RANDOM MENTALANS BONKED:<br>
                 <button class="win95-button vapor-number" id="bonk-btn" style="width: 100%; font-size: 2.5rem; margin-top: 10px; display: block;">...</button>
             </div>
         </div>
@@ -662,7 +659,7 @@
                     if (activeOrPendingPopups === 0) {
                         triggerPopupCascade();
                     }
-                }, 350); // Changed from 300 to 350
+                }, 300);
             });
         }
 
@@ -673,7 +670,7 @@
             triggerRandomEffect();
             setTimeout(() => {
                 windowElement.style.display = "none";
-            }, 350); // Changed from 300 to 350
+            }, 300);
             triggerPopupCascade();
         });
 
@@ -683,7 +680,7 @@
             triggerRandomEffect();
             setTimeout(() => {
                 bonkWindow.style.display = "none";
-            }, 350); // Changed from 300 to 350
+            }, 300);
         });
 
         // Initialize Everything
