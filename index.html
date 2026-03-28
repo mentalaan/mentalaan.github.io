@@ -2,24 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ＶＡＰＯＲＷＡＶＥ // １９９５</title>
     <style>
         /* === BASE AESTHETIC === */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh; /* Fallback for older browsers */
+            height: 100dvh; /* Modern fix for mobile address bar */
+            overflow: hidden; /* Hide scrollbars */
+            touch-action: none; /* Prevents swipe scrolling and pull-to-refresh on mobile */
+        }
+
         body {
             background: linear-gradient(180deg, #1a0b2e 0%, #2b1055 50%, #7597de 100%);
             background-attachment: fixed;
             color: #01cdfe;
             font-family: 'Courier New', Courier, monospace;
             text-align: center;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Hide scrollbars for the immersive effect */
+            box-sizing: border-box;
         }
 
         /* === CRT SCANLINE OVERLAY === */
@@ -68,6 +75,7 @@
             padding: 10px 0;
             position: absolute;
             top: 0;
+            left: 0;
             border-bottom: 3px solid #01cdfe;
             z-index: 10;
             overflow: hidden;       /* Hides the text outside the box */
@@ -212,35 +220,39 @@
 
         /* === MOBILE RESPONSIVENESS === */
         @media screen and (max-width: 768px) {
+            .text-container {
+                margin-top: 50px;           /* Push down slightly to clear marquee */
+            }
+
             h1 {
-                font-size: 2.5rem;          /* Scale down massive font */
-                letter-spacing: 5px;        /* Reduce spacing so it fits */
+                font-size: 2.2rem;          /* Scale down massive font further to ensure fit */
+                letter-spacing: 5px;        
                 text-shadow: 2px 2px 0px #ff71ce, 0 0 10px #ff71ce;
             }
 
             h2 {
                 font-size: 1.2rem;
                 letter-spacing: 4px;
-                margin-bottom: 30px;
+                margin-bottom: 20px;        /* Reduce gap to fit in dynamic viewport */
             }
 
             .sun {
-                width: 200px;               /* Shrink sun to prevent overlap */
-                height: 200px;
-                bottom: 25vh; 
+                width: 220px;               
+                height: 220px;
+                bottom: 30vh;               /* Lift sun so it remains visible behind text/window */
             }
 
             .win95-window {
-                width: 90%;                 /* Let the window scale fluidly */
-                max-width: 350px;           /* But don't let it get too big */
+                width: 85%;                 
+                max-width: 350px;           
             }
 
             .vapor-number {
-                font-size: 2rem;            /* Scale down counter text */
+                font-size: 2rem;            
             }
 
             .vapor-marquee-container {
-                font-size: 1rem;            /* Scale down marquee */
+                font-size: 1rem;            
             }
         }
     </style>
