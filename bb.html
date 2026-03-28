@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ｍｅｎｔａｌａｎ // １９９５</title>
+    <style>
+        /* Importing a retro pixel font */
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(180deg, #090a0f 0%, #1c093a 50%, #2b003a 100%);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'VT323', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* === 90s MARQUEE === */
+        marquee {
+            width: 100%;
+            background-color: #ff71ce;
+            color: #2b1055;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            border-bottom: 3px solid #01cdfe;
+            z-index: 10;
+        }
+
+        /* === THE GLOWING SUN & SCANLINES === */
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35vh;
+            height: 35vh;
+            background: linear-gradient(180deg, #ffea00 0%, #ff0055 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(255, 0, 85, 0.8), 0 0 120px rgba(255, 234, 0, 0.4);
+            z-index: 1;
+        }
+
+        .sun::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 4%,
+                #1c093a 4%,
+                #1c093a 5%
+            );
+        }
+
+        /* === 3D SCROLLING NEON GRID === */
+        .grid-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50vh;
+            perspective: 600px;
+            z-index: 2;
+        }
+
+        .grid {
+            position: absolute;
+            width: 200vw;
+            height: 200vh;
+            bottom: -50vh;
+            left: -50vw;
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 255, 0.8) 2px, transparent 2px),
+                linear-gradient(to top, rgba(255, 0, 255, 0.8) 2px, transparent 2px);
+            background-size: 60px 60px;
+            transform: rotateX(75deg);
+            animation: scrollGrid 1.5s linear infinite;
+            box-shadow: inset 0 100px 100px rgba(28, 9, 58, 1);
+        }
+
+        @keyframes scrollGrid {
+            0% { transform: rotateX(75deg) translateY(0); }
+            100% { transform: rotateX(75deg) translateY(60px); }
+        }
+
+        /* === FLOATING GLASS CARD === */
+        .glass-card {
+            position: relative;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            animation: float 4s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* === TYPOGRAPHY & MEDIA === */
+        h1 {
+            color: #fff;
+            font-size: 4.5rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #0ff,
+                0 0 40px #0ff,
+                0 0 80px #0ff;
+            margin-bottom: 5px;
+        }
+
+        p {
+            color: #05ffa1; /* Neon Green */
+            font-size: 1.8rem;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px #05ffa1;
+            margin-bottom: 20px;
+        }
+
+        .aesthetic-gif {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        .aesthetic-gif:hover {
+            opacity: 1;
+        }
+
+        /* === HIT COUNTER STYLES === */
+        .vapor-counter-box {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #ff00ff;
+            color: #00ffff;
+            border: 3px solid #00ffff;
+            padding: 15px 30px;
+            display: inline-block;
+            box-shadow: 6px 6px 0px #000080; /* Deep Windows 95 Blue */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: transform 0.2s;
+        }
+
+        .vapor-counter-box:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px #000080;
+        }
+
+        .vapor-label {
+            font-size: 1.3rem;
+            margin-right: 15px;
+            text-shadow: 2px 2px #000080;
+        }
+
+        .vapor-number {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 3px 3px #000080;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <marquee scrollamount="8">
+        ＷＥＬＣＯＭＥ ＴＯ ＴＨＥ ＶＩＲＴＵＡＬ ＰＬＡＺＡ // ＥＮＪＯＹ ＹＯＵＲ ＳＴＡＹ // ＮＯＴＨＩＮＧ ＩＳ ＲＥＡＬ
+    </marquee>
+
+    <div class="sun"></div>
+    
+    <div class="grid-container">
+        <div class="grid"></div>
+    </div>
+
+    <div class="glass-card">
+        <h1>Ｍｅｎｔａｌａｎ</h1>
+        <p>// デジタル //</p>
+        
+        <img class="aesthetic-gif" src="mentalan.gif" alt="Aesthetic GIF">
+
+        <div class="vapor-counter-box">
+            <span class="vapor-label">HITS [///]</span>
+            <span id="visitor-count" class="vapor-number">LOAD</span>
+        </div>
+    </div>
+
+    <script>
+        // Points to your live Render backend
+        const backendUrl = "https://mentalan-backend.onrender.com/counter";
+
+        async function fetchHitCount() {
+            const counterElement = document.getElementById("visitor-count");
+            
+            try {
+                // Ping the FastAPI server
+                const response = await fetch(backendUrl);
+                
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+
+                // Parse the JSON
+                const data = await response.json();
+                
+                // Update the screen
+                counterElement.innerText = data.count;
+                
+            } catch (error) {
+                console.error("Error fetching the counter:", error);
+                // If the backend is asleep or broken, show an aesthetic error
+                counterElement.innerText = "ERR";
+                counterElement.style.color = "#ffeb3b"; // Turn yellow on error
+            }
+        }
+
+        // Run the script when the page loads
+        fetchHitCount();
+    </script>
+
+</body>
+</html>

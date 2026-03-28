@@ -10,10 +10,10 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100vh; /* Fallback for older browsers */
-            height: 100dvh; /* Modern fix for mobile address bar */
-            overflow: hidden; /* Hide scrollbars */
-            touch-action: none; /* Prevents swipe scrolling and pull-to-refresh on mobile */
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            touch-action: none;
         }
 
         body {
@@ -38,7 +38,13 @@
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
             background-size: 100% 4px;
             z-index: 100;
-            pointer-events: none; /* Lets you click through the scanlines */
+            pointer-events: none;
+            animation: scanlines 10s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100vh; }
         }
 
         /* === TYPOGRAPHY === */
@@ -55,6 +61,12 @@
             letter-spacing: 15px;
             margin-bottom: 0;
             text-transform: uppercase;
+            animation: neonPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            0% { text-shadow: 4px 4px 0px #ff71ce, 0 0 15px #ff71ce; }
+            100% { text-shadow: 4px 4px 0px #ff71ce, 0 0 35px #ff71ce, 0 0 10px #fff; }
         }
 
         h2 {
@@ -78,26 +90,22 @@
             left: 0;
             border-bottom: 3px solid #01cdfe;
             z-index: 10;
-            overflow: hidden;       /* Hides the text outside the box */
-            white-space: nowrap;    /* Forces text onto one line */
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 0 15px #ff71ce;
         }
 
         .vapor-marquee-text {
             display: inline-block;
-            /* 15s is the speed. Lower = faster, Higher = slower */
             animation: scrollText 15s linear infinite; 
         }
 
         @keyframes scrollText {
-            0% {
-                transform: translateX(100vw); /* Start off-screen Right */
-            }
-            100% {
-                transform: translateX(-100%); /* End off-screen Left */
-            }
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
         }
 
-        /* === WINDOWS 95 UI (THE COUNTER) === */
+        /* === WINDOWS 95 UI === */
         .win95-window {
             background: #c0c0c0;
             border-top: 3px solid #ffffff;
@@ -109,6 +117,14 @@
             position: relative;
             z-index: 10;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            transform-origin: center;
+        }
+
+        .win95-window.closing {
+            transform: scale(0.8);
+            opacity: 0;
+            pointer-events: none;
         }
 
         .win95-titlebar {
@@ -139,6 +155,19 @@
             align-items: center;
             cursor: pointer;
             font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .win95-close:hover {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .win95-close:active {
+            border-top: 2px solid #000000;
+            border-left: 2px solid #000000;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
         }
 
         .win95-content {
@@ -156,6 +185,27 @@
             margin-top: 10px;
         }
 
+        /* === POPUP STYLES === */
+        .popup-window {
+            position: absolute;
+            z-index: 50;
+            width: 250px;
+            animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .popup-img {
+            width: 100%;
+            height: auto;
+            border: 2px solid #808080;
+            box-sizing: border-box;
+            display: block;
+        }
+
         /* === THE HORIZON (SUN & GRID) === */
         .sun {
             width: 300px;
@@ -167,10 +217,20 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 1;
-            box-shadow: 0 0 80px #ff71ce;
-            /* Creates the classic sliced effect */
+            box-shadow: 0 0 80px #ff71ce, 0 0 150px rgba(255, 113, 206, 0.4);
             mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
             -webkit-mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
+        }
+
+        .horizon-glow {
+            position: absolute;
+            bottom: 40vh;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #01cdfe;
+            box-shadow: 0 0 20px 5px #01cdfe, 0 -10px 40px #ff71ce;
+            z-index: 3;
         }
 
         .grid-container {
@@ -197,7 +257,6 @@
             box-shadow: 0 0 20px #01cdfe inset;
         }
 
-        /* Fade out the grid at the horizon */
         .grid-fade {
             position: absolute;
             bottom: 0;
@@ -220,40 +279,14 @@
 
         /* === MOBILE RESPONSIVENESS === */
         @media screen and (max-width: 768px) {
-            .text-container {
-                margin-top: 50px;           /* Push down slightly to clear marquee */
-            }
-
-            h1 {
-                font-size: 2.2rem;          /* Scale down massive font further to ensure fit */
-                letter-spacing: 5px;        
-                text-shadow: 2px 2px 0px #ff71ce, 0 0 10px #ff71ce;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-                letter-spacing: 4px;
-                margin-bottom: 20px;        /* Reduce gap to fit in dynamic viewport */
-            }
-
-            .sun {
-                width: 220px;               
-                height: 220px;
-                bottom: 30vh;               /* Lift sun so it remains visible behind text/window */
-            }
-
-            .win95-window {
-                width: 85%;                 
-                max-width: 350px;           
-            }
-
-            .vapor-number {
-                font-size: 2rem;            
-            }
-
-            .vapor-marquee-container {
-                font-size: 1rem;            
-            }
+            .text-container { margin-top: 50px; }
+            h1 { font-size: 2.2rem; letter-spacing: 5px; text-shadow: 2px 2px 0px #ff71ce, 0 0 10px #ff71ce; }
+            h2 { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 20px; }
+            .sun { width: 220px; height: 220px; bottom: 30vh; }
+            .win95-window { width: 85%; max-width: 350px; }
+            .popup-window { width: 200px; } /* Smaller popups on mobile */
+            .vapor-number { font-size: 2rem; }
+            .vapor-marquee-container { font-size: 1rem; }
         }
     </style>
 </head>
@@ -265,6 +298,7 @@
     </div></div>
 
     <div class="sun"></div>
+    <div class="horizon-glow"></div>
     
     <div class="grid-container">
         <div class="grid"></div>
@@ -272,14 +306,14 @@
     </div>
 
     <div class="text-container">
-        <h1>Ｍｅｎｔａｌａｎ</h1>
+        <h1>ＴＯＢＩ</h1>
         <h2>// デジタル //</h2>
     </div>
 
-    <div class="win95-window">
+    <div class="win95-window" id="visitor-window">
         <div class="win95-titlebar">
             <span>visitor_log.exe</span>
-            <div class="win95-close">X</div>
+            <div class="win95-close" id="close-btn" aria-label="Close window">X</div>
         </div>
         <div class="win95-content">
             <span style="font-weight: bold;">VISITORS:</span>
@@ -291,20 +325,16 @@
         // ⚠️ CHANGE THIS URL to your actual Render backend URL
         const backendUrl = "https://mentalan-backend.onrender.com/visits";
 
+        // --- FETCH LOGIC ---
         async function fetchHitCount() {
             const counterElement = document.getElementById("visitor-count");
-            
             try {
                 const response = await fetch(backendUrl);
                 if (!response.ok) throw new Error("Network response was not ok");
-
                 const data = await response.json();
-                
-                // Adding a slight delay just for aesthetic drama
                 setTimeout(() => {
                     counterElement.innerText = data.count;
                 }, 800);
-                
             } catch (error) {
                 console.error("Error fetching the counter:", error);
                 setTimeout(() => {
@@ -315,6 +345,91 @@
             }
         }
 
+        // --- POPUP LOGIC ---
+        const gifUrls = [
+            "gifs/mentalan.gif", // Windows 95 maze
+            "gifs/mentalan_2.gif", // Statues / Grid
+            "gifs/vj.gif", // Dolphin
+            "gifs/whistle.gif", // Error loop
+            "gifs/budweiser.gif"  // Synthwave driving
+        ];
+
+        const popupTitles = [
+            "ERROR_420.exe",
+            "A_E_S_T_H_E_T_I_C.dll",
+            "system_failure.bat",
+            "D O L P H I N S.sys",
+            "VIRUS_DETECTED.exe"
+        ];
+
+        let activeOrPendingPopups = 0; // Tracks popups to trigger restart
+
+        function triggerPopupCascade() {
+            const delays = [500, 1000, 1500, 2200, 2600]; // Times when popups will appear
+            
+            // Add the number of new popups we are about to spawn to the tracker
+            activeOrPendingPopups += delays.length; 
+
+            delays.forEach(delay => {
+                setTimeout(createRandomPopup, delay);
+            });
+        }
+
+        function createRandomPopup() {
+            const randomGif = gifUrls[Math.floor(Math.random() * gifUrls.length)];
+            const randomTitle = popupTitles[Math.floor(Math.random() * popupTitles.length)];
+
+            const popup = document.createElement("div");
+            popup.className = "win95-window popup-window";
+            
+            const maxLeft = window.innerWidth - (window.innerWidth < 768 ? 200 : 250); 
+            const maxTop = window.innerHeight - 250;
+            popup.style.left = Math.max(0, Math.floor(Math.random() * maxLeft)) + "px";
+            popup.style.top = Math.max(0, Math.floor(Math.random() * maxTop)) + "px";
+
+            popup.innerHTML = `
+                <div class="win95-titlebar">
+                    <span>${randomTitle}</span>
+                    <div class="win95-close popup-close">X</div>
+                </div>
+                <div style="padding: 10px; background: #c0c0c0;">
+                    <img src="${randomGif}" class="popup-img" alt="Vaporwave GIF">
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+
+            const closeBtn = popup.querySelector('.popup-close');
+            closeBtn.addEventListener('click', () => {
+                popup.classList.add("closing");
+                
+                setTimeout(() => {
+                    popup.remove();
+                    activeOrPendingPopups--; // Subtract from tracker when fully closed
+                    
+                    // If all popups from this wave are gone, trigger a new wave!
+                    if (activeOrPendingPopups === 0) {
+                        triggerPopupCascade();
+                    }
+                }, 300);
+            });
+        }
+
+        // --- UI INTERACTION LOGIC ---
+        const mainCloseBtn = document.getElementById("close-btn");
+        const windowElement = document.getElementById("visitor-window");
+
+        mainCloseBtn.addEventListener("click", () => {
+            windowElement.classList.add("closing");
+            setTimeout(() => {
+                windowElement.style.display = "none";
+            }, 300);
+
+            // Start the infinite loop
+            triggerPopupCascade();
+        });
+
+        // Initialize fetch
         fetchHitCount();
     </script>
 </body>

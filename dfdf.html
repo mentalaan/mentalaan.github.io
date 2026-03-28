@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ＶＡＰＯＲＷＡＶＥ // １９９５</title>
+    <style>
+        /* === THE AESTHETIC (CSS) === */
+        body {
+            background: linear-gradient(180deg, #2b1055 0%, #7597de 100%);
+            background-attachment: fixed;
+            color: #01cdfe; /* Neon Cyan */
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #fffb96; /* Pale Yellow */
+            text-shadow: 4px 4px 0px #ff71ce; /* Hot Pink Shadow */
+            letter-spacing: 10px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            color: #05ffa1; /* Neon Green */
+            letter-spacing: 5px;
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+
+        marquee {
+            width: 100%;
+            background-color: #ff71ce;
+            color: #2b1055;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            border-bottom: 3px solid #01cdfe;
+        }
+
+        /* === THE COUNTER STYLES === */
+        .vapor-counter-box {
+            background-color: #ff00ff;
+            color: #00ffff;
+            border: 3px solid #00ffff;
+            padding: 20px 40px;
+            display: inline-block;
+            box-shadow: 8px 8px 0px #000080; /* Deep Windows 95 Blue */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 50px;
+            transition: transform 0.2s;
+        }
+
+        .vapor-counter-box:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px #000080;
+        }
+
+        .vapor-label {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            text-shadow: 2px 2px #000080;
+        }
+
+        .vapor-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 3px 3px #000080;
+            color: #ffffff;
+        }
+
+        /* Retro Sun / Grid Illusion */
+        .sun {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(180deg, #ff71ce 0%, #ffeb3b 100%);
+            border-radius: 50%;
+            position: absolute;
+            bottom: -50px;
+            z-index: -1;
+            box-shadow: 0 0 50px #ff71ce;
+        }
+    </style>
+</head>
+<body>
+
+    <marquee scrollamount="8">
+        ＷＥＬＣＯＭＥ ＴＯ ＴＨＥ ＶＩＲＴＵＡＬ ＰＬＡＺＡ // ＥＮＪＯＹ ＹＯＵＲ ＳＴＡＹ // ＮＯＴＨＩＮＧ ＩＳ ＲＥＡＬ
+    </marquee>
+
+    <div class="sun"></div>
+
+    <h1>Ｍｅｎｔａｌａｎ</h1>
+    <h2>// デジタル //</h2>
+
+    <div class="vapor-counter-box">
+        <span class="vapor-label">VISITORS [///]</span>
+        <span id="visitor-count" class="vapor-number">LOAD</span>
+    </div>
+
+    <script>
+        // ⚠️ CHANGE THIS URL to your actual Render backend URL
+        // Example: "https://mentalan-backend.onrender.com/counter"
+        const backendUrl = "https://mentalan-backend.onrender.com/counter";
+
+        async function fetchHitCount() {
+            const counterElement = document.getElementById("visitor-count");
+            
+            try {
+                // Ping the FastAPI server
+                const response = await fetch(backendUrl);
+                
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+
+                // Parse the JSON
+                const data = await response.json();
+                
+                // Update the screen
+                counterElement.innerText = data.count;
+                
+            } catch (error) {
+                console.error("Error fetching the counter:", error);
+                // If the backend is asleep or broken, show an aesthetic error
+                counterElement.innerText = "ERR_404";
+                counterElement.style.color = "#ffeb3b"; // Turn yellow on error
+            }
+        }
+
+        // Run the script when the page loads
+        fetchHitCount();
+    </script>
+</body>
+</html>

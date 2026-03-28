@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ＶＡＰＯＲＷＡＶＥ // １９９５</title>
+    <style>
+        /* === BASE AESTHETIC === */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        body {
+            background: linear-gradient(180deg, #1a0b2e 0%, #2b1055 50%, #7597de 100%);
+            background-attachment: fixed;
+            color: #01cdfe;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* === CRT SCANLINE OVERLAY === */
+        .crt::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 100;
+            pointer-events: none;
+            animation: scanlines 10s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100vh; }
+        }
+
+        /* === TYPOGRAPHY === */
+        .text-container {
+            position: relative;
+            z-index: 10;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 5rem;
+            color: #fffb96;
+            text-shadow: 4px 4px 0px #ff71ce, 0 0 20px #ff71ce;
+            letter-spacing: 15px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            animation: neonPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            0% { text-shadow: 4px 4px 0px #ff71ce, 0 0 15px #ff71ce; }
+            100% { text-shadow: 4px 4px 0px #ff71ce, 0 0 35px #ff71ce, 0 0 10px #fff; }
+        }
+
+        h2 {
+            color: #05ffa1;
+            text-shadow: 2px 2px 0px #2b1055, 0 0 10px #05ffa1;
+            letter-spacing: 10px;
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+
+         .vapor-marquee-container {
+            width: 100%;
+            background-color: #ff71ce;
+            color: #2b1055;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid #01cdfe;
+            z-index: 10;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 0 15px #ff71ce;
+        }
+
+        .vapor-marquee-text {
+            display: inline-block;
+            animation: scrollText 15s linear infinite; 
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* === WINDOWS 95 UI === */
+        .win95-window {
+            background: #c0c0c0;
+            border-top: 3px solid #ffffff;
+            border-left: 3px solid #ffffff;
+            border-right: 3px solid #808080;
+            border-bottom: 3px solid #808080;
+            padding: 2px;
+            width: 350px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            transform-origin: center;
+        }
+
+        .win95-window.closing {
+            transform: scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .win95-titlebar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 1px;
+        }
+
+        .win95-close {
+            background: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            width: 16px;
+            height: 16px;
+            font-weight: bold;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .win95-close:hover {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .win95-close:active {
+            border-top: 2px solid #000000;
+            border-left: 2px solid #000000;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .win95-content {
+            padding: 20px;
+            color: #000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .vapor-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff00ff;
+            text-shadow: 2px 2px #00ffff;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* === POPUP STYLES === */
+        .popup-window {
+            position: absolute;
+            z-index: 50;
+            width: 250px;
+            animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .popup-img {
+            width: 100%;
+            height: auto;
+            border: 2px solid #808080;
+            box-sizing: border-box;
+            display: block;
+        }
+
+        /* === THE HORIZON (SUN & GRID) === */
+        .sun {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(180deg, #ffeb3b 0%, #ff71ce 100%);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20vh;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0 0 80px #ff71ce, 0 0 150px rgba(255, 113, 206, 0.4);
+            mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
+            -webkit-mask-image: repeating-linear-gradient(to bottom, black 0%, black 8%, transparent 8%, transparent 10%);
+        }
+
+        .horizon-glow {
+            position: absolute;
+            bottom: 40vh;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #01cdfe;
+            box-shadow: 0 0 20px 5px #01cdfe, 0 -10px 40px #ff71ce;
+            z-index: 3;
+        }
+
+        .grid-container {
+            perspective: 600px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40vh;
+            z-index: 2;
+        }
+
+        .grid {
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(to right, #01cdfe 2px, transparent 2px),
+                linear-gradient(to top, #ff71ce 2px, transparent 2px);
+            background-size: 60px 60px;
+            transform: rotateX(75deg);
+            animation: moveGrid 3s linear infinite;
+            box-shadow: 0 0 20px #01cdfe inset;
+        }
+
+        .grid-fade {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #2b1055 0%, transparent 40%);
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes moveGrid {
+            0% { transform: rotateX(75deg) translateY(0); }
+            100% { transform: rotateX(75deg) translateY(60px); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* === MOBILE RESPONSIVENESS === */
+        @media screen and (max-width: 768px) {
+            .text-container { margin-top: 50px; }
+            h1 { font-size: 2.2rem; letter-spacing: 5px; text-shadow: 2px 2px 0px #ff71ce, 0 0 10px #ff71ce; }
+            h2 { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 20px; }
+            .sun { width: 220px; height: 220px; bottom: 30vh; }
+            .win95-window { width: 85%; max-width: 350px; }
+            .popup-window { width: 200px; } /* Smaller popups on mobile */
+            .vapor-number { font-size: 2rem; }
+            .vapor-marquee-container { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body class="crt">
+
+    <div class="vapor-marquee-container">
+        <div class="vapor-marquee-text">
+        ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ // ＶＯＴＥ ＦＯＲ ＷＨＩＳＴＬＥ
+    </div></div>
+
+    <div class="sun"></div>
+    <div class="horizon-glow"></div>
+    
+    <div class="grid-container">
+        <div class="grid"></div>
+        <div class="grid-fade"></div>
+    </div>
+
+    <div class="text-container">
+        <h1>ＴＯＢＩ</h1>
+        <h2>// デジタル //</h2>
+    </div>
+
+    <div class="win95-window" id="visitor-window">
+        <div class="win95-titlebar">
+            <span>visitor_log.exe</span>
+            <div class="win95-close" id="close-btn" aria-label="Close window">X</div>
+        </div>
+        <div class="win95-content">
+            <span style="font-weight: bold;">VISITORS:</span>
+            <span id="visitor-count" class="vapor-number">L0AD1NG...</span>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ CHANGE THIS URL to your actual Render backend URL
+        const backendUrl = "https://mentalan-backend.onrender.com/visits";
+
+        // --- FETCH LOGIC ---
+        async function fetchHitCount() {
+            const counterElement = document.getElementById("visitor-count");
+            try {
+                const response = await fetch(backendUrl);
+                if (!response.ok) throw new Error("Network response was not ok");
+                const data = await response.json();
+                setTimeout(() => {
+                    counterElement.innerText = data.count;
+                }, 800);
+            } catch (error) {
+                console.error("Error fetching the counter:", error);
+                setTimeout(() => {
+                    counterElement.innerText = "ERR_404";
+                    counterElement.style.color = "#ff0000"; 
+                    counterElement.style.textShadow = "2px 2px #000";
+                }, 800);
+            }
+        }
+
+        // --- POPUP LOGIC ---
+        const gifUrls = [
+            "gifs/mentalan.gif", // Windows 95 maze
+            "gifs/mentalan_2.gif", // Statues / Grid
+            "gifs/vj.gif", // Dolphin
+            "gifs/whistle.gif", // Error loop
+            "gifs/budweiser.gif"  // Synthwave driving
+        ];
+
+        const popupTitles = [
+            "ERROR_420.exe",
+            "A_E_S_T_H_E_T_I_C.dll",
+            "system_failure.bat",
+            "D O L P H I N S.sys",
+            "VIRUS_DETECTED.exe"
+        ];
+
+        let activeOrPendingPopups = 0; // Tracks popups to trigger restart
+
+        function triggerPopupCascade() {
+            const delays = [500, 1000, 1500, 2200, 2600]; // Times when popups will appear
+            
+            // Add the number of new popups we are about to spawn to the tracker
+            activeOrPendingPopups += delays.length; 
+
+            delays.forEach(delay => {
+                setTimeout(createRandomPopup, delay);
+            });
+        }
+
+        function createRandomPopup() {
+            const randomGif = gifUrls[Math.floor(Math.random() * gifUrls.length)];
+            const randomTitle = popupTitles[Math.floor(Math.random() * popupTitles.length)];
+
+            const popup = document.createElement("div");
+            popup.className = "win95-window popup-window";
+            
+            const maxLeft = window.innerWidth - (window.innerWidth < 768 ? 200 : 250); 
+            const maxTop = window.innerHeight - 250;
+            popup.style.left = Math.max(0, Math.floor(Math.random() * maxLeft)) + "px";
+            popup.style.top = Math.max(0, Math.floor(Math.random() * maxTop)) + "px";
+
+            popup.innerHTML = `
+                <div class="win95-titlebar">
+                    <span>${randomTitle}</span>
+                    <div class="win95-close popup-close">X</div>
+                </div>
+                <div style="padding: 10px; background: #c0c0c0;">
+                    <img src="${randomGif}" class="popup-img" alt="Vaporwave GIF">
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+
+            const closeBtn = popup.querySelector('.popup-close');
+            closeBtn.addEventListener('click', () => {
+                popup.classList.add("closing");
+                
+                setTimeout(() => {
+                    popup.remove();
+                    activeOrPendingPopups--; // Subtract from tracker when fully closed
+                    
+                    // If all popups from this wave are gone, trigger a new wave!
+                    if (activeOrPendingPopups === 0) {
+                        triggerPopupCascade();
+                    }
+                }, 300);
+            });
+        }
+
+        // --- UI INTERACTION LOGIC ---
+        const mainCloseBtn = document.getElementById("close-btn");
+        const windowElement = document.getElementById("visitor-window");
+
+        mainCloseBtn.addEventListener("click", () => {
+            windowElement.classList.add("closing");
+            setTimeout(() => {
+                windowElement.style.display = "none";
+            }, 300);
+
+            // Start the infinite loop
+            triggerPopupCascade();
+        });
+
+        // Initialize fetch
+        fetchHitCount();
+    </script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ｍｅｎｔａｌａｎ // 6969</title>
+    <style>
+        /* Importing a retro pixel font */
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Modified background: deeper gradient with subtle cyan glow base */
+            background: linear-gradient(180deg, #090a0f 0%, #1c093a 50%, #2b003a 100%);
+            background-color: #090a0f; /* Base for radial cyan glow */
+            /* Add deep cyan glow base behind everything */
+            background-image: linear-gradient(180deg, #090a0f 0%, #1c093a 50%, #2b003a 100%),
+                             radial-gradient(ellipse at bottom, rgba(0, 255, 255, 0.3) 0%, rgba(0, 255, 255, 0) 70%);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'VT323', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative; /* Base for z-index layering */
+        }
+
+        /* === BULLETPROOF CSS MARQUEE === */
+        .vapor-marquee-container {
+            width: 100%;
+            background-color: #ff71ce;
+            color: #2b1055;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            border-bottom: 3px solid #01cdfe;
+            z-index: 10;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .vapor-marquee-text {
+            display: inline-block;
+            animation: scrollText 15s linear infinite; 
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* === THE GLOWING SUN & SCANLINES === */
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35vh;
+            height: 35vh;
+            background: linear-gradient(180deg, #ffea00 0%, #ff0055 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(255, 0, 85, 0.8), 0 0 120px rgba(255, 234, 0, 0.4);
+            z-index: 1;
+        }
+
+        .sun::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 4%,
+                #1c093a 4%,
+                #1c093a 5%
+            );
+        }
+
+        /* === 3D SCROLLING NEON GRID === */
+        .grid-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50vh;
+            perspective: 600px;
+            z-index: 2;
+        }
+
+        .grid {
+            position: absolute;
+            width: 200vw;
+            height: 200vh;
+            bottom: -50vh;
+            left: -50vw;
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 255, 0.8) 2px, transparent 2px),
+                linear-gradient(to top, rgba(255, 0, 255, 0.8) 2px, transparent 2px);
+            background-size: 60px 60px;
+            transform: rotateX(75deg);
+            animation: scrollGrid 1.5s linear infinite;
+            box-shadow: inset 0 100px 100px rgba(28, 9, 58, 1);
+        }
+
+        @keyframes scrollGrid {
+            0% { transform: rotateX(75deg) translateY(0); }
+            100% { transform: rotateX(75deg) translateY(60px); }
+        }
+
+        /* === FLOATING GLASS CARD === */
+        .glass-card {
+            position: relative;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            animation: float 4s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Add subtle pink glow effect underneath the glass card */
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: -10px;
+            right: -10px;
+            height: 20px;
+            background: rgba(255, 0, 255, 0.2);
+            filter: blur(15px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* === TYPOGRAPHY & MEDIA === */
+        h1 {
+            color: #fff;
+            font-size: 4.5rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #0ff, 0 0 40px #0ff, 0 0 80px #0ff;
+            margin-bottom: 5px;
+        }
+
+        p {
+            color: #05ffa1;
+            font-size: 1.8rem;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px #05ffa1;
+            margin-bottom: 20px;
+        }
+
+        .aesthetic-gif {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        .aesthetic-gif:hover {
+            opacity: 1;
+        }
+
+        /* === HIT COUNTER STYLES === */
+        .vapor-counter-box {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #ff00ff;
+            color: #00ffff;
+            border: 3px solid #00ffff;
+            padding: 15px 30px;
+            display: inline-block;
+            box-shadow: 6px 6px 0px #000080;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .vapor-label {
+            font-size: 1.3rem;
+            margin-right: 15px;
+            text-shadow: 2px 2px #000080;
+        }
+
+        .vapor-number {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 3px 3px #000080;
+            color: #ffffff;
+        }
+
+        /* === THE BONK BUTTON === */
+        .vapor-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #05ffa1;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(5, 255, 161, 0.5), inset 0 0 10px rgba(5, 255, 161, 0.5);
+            transition: all 0.2s ease-in-out;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vapor-btn:hover {
+            background-color: rgba(5, 255, 161, 0.2);
+            box-shadow: 0 0 25px #05ffa1, inset 0 0 20px #05ffa1;
+            transform: scale(1.05);
+        }
+
+        .vapor-btn:active {
+            transform: scale(0.90);
+        }
+
+        .btn-gif {
+            height: 60px;
+            width: auto;
+            border-radius: 5px;
+            transition: filter 0.2s;
+        }
+
+        /* === NEW BACKGROUND ELEMENTS IN THE BOTTOM BACKGROUND === */
+
+        /* Segmented sinking wireframe sun at the bottom background */
+        .vapor-bottom-sun {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40vh;
+            height: 40vh;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ff00ff 0deg, #ffea00 90deg, #ff0055 180deg, #ffea00 270deg, #ff00ff 360deg
+            );
+            /* Add wireframe segmentation pattern */
+            background-image: conic-gradient(
+                #ff00ff 0deg, #ffea00 90deg, #ff0055 180deg, #ffea00 270deg, #ff00ff 360deg
+            );
+            /* Sinking animation and slow translation */
+            animation: sinkingSun 30s linear infinite, floatSlightly 5s ease-in-out infinite;
+            z-index: 1.5; /* Below central sun and card, above body and fog */
+            opacity: 0.6; /* Subtle sinking effect */
+        }
+
+        @keyframes sinkingSun {
+            0% { transform: translateX(-50%) translateY(0); }
+            100% { transform: translateX(-50%) translateY(30vh); } /* Sinking down into the grid and off-screen */
+        }
+
+        @keyframes floatSlightly {
+            0% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+            50% { transform: translateX(-50%) translateY(-5px) rotate(2deg); }
+            100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+        }
+
+        /* Pseudo-element for wireframe structure of sinking sun */
+        .vapor-bottom-sun::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 4%,
+                #1c093a 4%,
+                #1c093a 5%
+            );
+        }
+
+        /* Floating Geometric Wireframe Polygon */
+        .vapor-bottom-poly {
+            position: absolute;
+            bottom: 30vh;
+            left: 20%;
+            width: 10vh;
+            height: 10vh;
+            perspective: 600px;
+            animation: floatingPoly 6s ease-in-out infinite, rotatingPoly 10s linear infinite;
+            z-index: 1.6;
+        }
+
+        /* Using pseudo-elements for wireframe of octahedron */
+        .vapor-bottom-poly::before,
+        .vapor-bottom-poly::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #00ffff;
+            background: transparent;
+            opacity: 0.5;
+        }
+
+        .vapor-bottom-poly::before {
+            transform: rotateY(45deg);
+        }
+
+        .vapor-bottom-poly::after {
+            transform: rotateY(-45deg);
+        }
+
+        @keyframes floatingPoly {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes rotatingPoly {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            100% { transform: rotateY(360deg) rotateX(360deg); }
+        }
+
+        /* Tiny, flickering glitch data fragments */
+        .vapor-bottom-glitches {
+            position: absolute;
+            bottom: 25vh;
+            right: 15%;
+            width: 15vh;
+            height: 10vh;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            animation: floatingGlitches 5s ease-in-out infinite;
+            z-index: 1.6;
+        }
+
+        /* Individual glitch fragments styled as tiny squares */
+        .glitch-fragment {
+            width: 1vh;
+            height: 1vh;
+            background: #ff00ff;
+            opacity: 0.8;
+            animation: glitchFlicker 0.2s linear infinite alternate;
+        }
+
+        /* Random animations for each fragment */
+        .glitch-fragment:nth-child(even) { animation-delay: 0.1s; background: #00ffff; }
+        .glitch-fragment:nth-child(3n) { animation-delay: 0.05s; }
+
+        @keyframes floatingGlitches {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes glitchFlicker {
+            0% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+
+        /* Hazy neon fog effect at the bottom background */
+        .vapor-bottom-fog {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10vh;
+            background: linear-gradient(180deg, rgba(9, 10, 15, 0) 0%, rgba(28, 9, 58, 0.8) 100%);
+            background-blend-mode: overlay;
+            /* Add backdrop-filter blur and color layer overlay */
+            background-image: linear-gradient(180deg, rgba(9, 10, 15, 0) 0%, rgba(28, 9, 58, 0.8) 100%),
+                             linear-gradient(180deg, transparent 0%, rgba(0, 255, 255, 0.3) 100%);
+            backdrop-filter: blur(10px);
+            z-index: 1.4; /* Below all floating elements and grid */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="vapor-marquee-container">
+        <div class="vapor-marquee-text">
+            🤘🏻 இப்ப இல்லனா எப்பவும் இல்ல 🤘🏻 காலம் பேசாது, ஆனால் காத்திருந்து பதில் சொல்லும் 🤘🏻
+        </div>
+    </div>
+    
+
+    <div class="sun"></div>
+    
+    <div class="grid-container">
+        <div class="grid"></div>
+    </div>
+
+    <div class="glass-card">
+        <h1>Ｍｅｎｔａｌａｎ</h1>
+         <p>// メンタラン //</p>
+        
+        <img class="aesthetic-gif" src="mentalan.gif" alt="Aesthetic GIF">
+
+        <div class="vapor-counter-box">
+            <span class="vapor-label">TIMES rANDOM mENTALANS bONKED</span>
+            <span id="visitor-count" class="vapor-number">∞</span>
+        </div>
+
+        <button id="hit-btn" class="vapor-btn">
+            <img src="bonk.gif" alt="BONK" class="btn-gif">
+        </button>
+        
+    </div>
+
+    <div class="vapor-background-elements">
+        <div class="vapor-bottom-sun"></div>
+        <div class="vapor-bottom-poly"></div>
+        <div class="vapor-bottom-glitches">
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+            <div class="glitch-fragment"></div>
+        </div>
+        <div class="vapor-bottom-fog"></div>
+    </div>
+
+    <script>
+        const backendUrl = "https://mentalan-backend.onrender.com/counter";
+        const LoadUrl = "https://mentalan-backend.onrender.com/bonks";
+        
+        const counterElement = document.getElementById("visitor-count");
+        const hitButton = document.getElementById("hit-btn");
+
+        async function triggerHit() {
+            try {
+                // Visual feedback: grayscale effect on Bonk GIF
+                hitButton.innerHTML = '<img src="bonk.gif" alt="BONK" class="btn-gif" style="filter: grayscale(100%); opacity: 0.5;">';
+                
+                const response = await fetch(backendUrl);
+                const data = await response.json();
+                
+                // Update the counter
+                counterElement.innerText = data.count;
+                
+                // Restore Pepe to his full colorful glory
+                hitButton.innerHTML = '<img src="bonk.gif" alt="BONK" class="btn-gif">';
+                
+            } catch (error) {
+                console.error("API Error:", error);
+                counterElement.innerText = "ERR";
+                hitButton.innerHTML = '<span style="color: #ffeb3b; font-family: \'VT323\', monospace; font-size: 1.5rem;">ＥＲＲＯＲ</span>';
+                counterElement.style.color = "#ffeb3b";
+            }
+        }
+
+        async function reloadHit() {
+            try {
+                hitButton.innerHTML = '<img src="bonk.gif" alt="BONK" class="btn-gif" style="filter: grayscale(100%); opacity: 0.5;">';
+                
+                const response = await fetch(LoadUrl);
+                const data = await response.json();
+                
+                // Update the counter
+                counterElement.innerText = data.count;
+                
+            } catch (error) {
+                console.error("API Error:", error);
+                counterElement.innerText = "ERR";
+                counterElement.style.color = "#ffeb3b";
+            }
+        }
+
+        // Run once on load
+        reloadHit();
+
+        // Run on button click
+        hitButton.addEventListener("click", triggerHit);
+    </script>
+
+</body>
+</html>
