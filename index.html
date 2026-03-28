@@ -58,20 +58,6 @@
             margin-bottom: 40px;
         }
 
-        /* marquee {
-            width: 100%;
-            background-color: #ff71ce;
-            color: #1a0b2e;
-            font-weight: bold;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            padding: 10px 0;
-            position: absolute;
-            top: 0;
-            z-index: 50;
-            border-bottom: 3px solid #05ffa1;
-            box-shadow: 0 5px 15px rgba(255, 113, 206, 0.4);
-        } */
          .vapor-marquee-container {
             width: 100%;
             background-color: #ff71ce;
@@ -222,6 +208,40 @@
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
+        }
+
+        /* === MOBILE RESPONSIVENESS === */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;          /* Scale down massive font */
+                letter-spacing: 5px;        /* Reduce spacing so it fits */
+                text-shadow: 2px 2px 0px #ff71ce, 0 0 10px #ff71ce;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+                margin-bottom: 30px;
+            }
+
+            .sun {
+                width: 200px;               /* Shrink sun to prevent overlap */
+                height: 200px;
+                bottom: 25vh; 
+            }
+
+            .win95-window {
+                width: 90%;                 /* Let the window scale fluidly */
+                max-width: 350px;           /* But don't let it get too big */
+            }
+
+            .vapor-number {
+                font-size: 2rem;            /* Scale down counter text */
+            }
+
+            .vapor-marquee-container {
+                font-size: 1rem;            /* Scale down marquee */
+            }
         }
     </style>
 </head>
