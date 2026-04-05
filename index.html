@@ -189,20 +189,12 @@
             position: absolute;
             z-index: 50;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
-            /* Updated transition: target scale instead of transform */
             transition: scale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
             transform-origin: center;
-            scale: 1; /* Define initial state */
-        }
-
-        #visitor-window {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            scale: 1; 
         }
 
         .win95-window.closing {
-            /* Use the independent scale property so it doesn't overwrite translate */
             scale: 0.8 !important; 
             opacity: 0 !important;
             pointer-events: none;
@@ -261,38 +253,6 @@
             padding: 20px;
             color: #000;
             font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* RESTORED VAPOR NUMBER STYLE */
-        .vapor-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #ff00ff;
-            text-shadow: 2px 2px #00ffff;
-            display: block; /* Restored to block to fix visitor log layout */
-            margin-top: 10px;
-        }
-
-        /* === WIN95 BUTTON === */
-        .win95-button {
-            background: #c0c0c0;
-            border-top: 3px solid #ffffff;
-            border-left: 3px solid #ffffff;
-            border-right: 3px solid #000000;
-            border-bottom: 3px solid #000000;
-            padding: 10px 20px;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            cursor: pointer;
-            transition: none;
-        }
-
-        .win95-button:active {
-            border-top: 3px solid #000000;
-            border-left: 3px solid #000000;
-            border-right: 3px solid #ffffff;
-            border-bottom: 3px solid #ffffff;
-            padding: 12px 18px 8px 22px; 
         }
 
         /* === POPUP STYLES === */
@@ -377,7 +337,6 @@
             .sun { width: 220px; height: 220px; bottom: 30vh; }
             .win95-window { width: 85%; max-width: 350px; }
             .popup-window { width: 200px; }
-            .vapor-number { font-size: 2rem; }
             .vapor-marquee-container { font-size: 1rem; }
         }
     </style>
@@ -407,37 +366,7 @@
         <h2>// デジタル //</h2>
     </div>
 
-    <div class="win95-window" id="visitor-window">
-        <div class="win95-titlebar" id="visitor-titlebar">
-            <span>visitor_log.exe</span>
-            <div class="win95-close" id="close-btn" aria-label="Close window">X</div>
-        </div>
-        <div class="win95-content">
-            <span style="font-weight: bold;">VISITOR ID:</span>
-            <span id="visitor-count" class="vapor-number">L0AD1NG...</span>
-        </div>
-    </div>
-
-    <div class="win95-window popup-window" id="bonk-window" style="display: none;">
-        <div class="win95-titlebar" id="bonk-titlebar">
-            <span>mentalan_bonk.exe</span>
-            <div class="win95-close" id="bonk-close-btn" aria-label="Close window">X</div>
-        </div>
-        <div class="win95-content" style="text-align: center;">
-            <img id="bonk-image" src="/images/bonk0.png" class="popup-img" alt="Bonk">
-            <br>
-            <div style="margin-top: 15px; font-weight: bold; font-size: 1.2rem;">
-                TIMES BONKED:<br>
-                <button class="win95-button vapor-number" id="bonk-btn" style="width: 100%; font-size: 2.5rem; margin-top: 10px; display: block;">...</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        const backendUrl = "https://mentalan-backend.onrender.com/visits";
-        const bonkFetchUrl = "https://mentalan-backend.onrender.com/bonks";   // GET for initial count
-        const bonkIncrementUrl = "https://mentalan-backend.onrender.com/counter"; // GET to increment count
-
         // --- Z-INDEX MANAGEMENT ---
         let currentZIndex = 50;
         function bringToFront(element) {
@@ -509,53 +438,6 @@
             element.ontouchstart = () => bringToFront(element);
         }
 
-        makeDraggable(document.getElementById("visitor-window"), document.getElementById("visitor-titlebar"));
-
-        // Initialize and position the Bonk Window randomly
-        function initBonkWindow() {
-            const bonkWindow = document.getElementById("bonk-window");
-            const maxLeft = window.innerWidth - (window.innerWidth < 768 ? 200 : 350); 
-            const maxTop = window.innerHeight - 350;
-            
-            bonkWindow.style.left = Math.max(0, Math.floor(Math.random() * maxLeft)) + "px";
-            bonkWindow.style.top = Math.max(0, Math.floor(Math.random() * maxTop)) + "px";
-            bonkWindow.style.display = "block";
-            
-            makeDraggable(bonkWindow, document.getElementById("bonk-titlebar"));
-        }
-
-        // --- FETCH LOGIC ---
-        async function fetchHitCount() {
-            const counterElement = document.getElementById("visitor-count");
-            try {
-                const response = await fetch(backendUrl);
-                if (!response.ok) throw new Error("Network response was not ok");
-                const data = await response.json();
-                setTimeout(() => {
-                    counterElement.innerText = data.count;
-                }, 800);
-            } catch (error) {
-                counterElement.innerText = "ERR_404";
-                counterElement.style.color = "#ff0000"; 
-            }
-        }
-
-        async function fetchBonkCount() {
-            const bonkBtn = document.getElementById("bonk-btn");
-            try {
-                // Fetch current count via GET /bonks
-                const response = await fetch(bonkFetchUrl);
-                if (!response.ok) throw new Error("Network response was not ok");
-                const data = await response.json();
-                setTimeout(() => {
-                    bonkBtn.innerText = data.count || 0;
-                }, 800);
-            } catch (error) {
-                bonkBtn.innerText = "ERR";
-                bonkBtn.style.color = "#ff0000"; 
-            }
-        }
-
         // --- RANDOM PAGE EFFECTS ---
         const effects = ['effect-glitch', 'effect-blur-shake'];
 
@@ -567,39 +449,6 @@
                 document.body.classList.remove(randomEffect);
             }, 300);
         }
-
-        // --- BONK IMAGE SWAP & BUTTON LOGIC ---
-        document.getElementById("bonk-btn").addEventListener("click", async () => {
-            const bonkImage = document.getElementById("bonk-image");
-            const bonkBtn = document.getElementById("bonk-btn");
-            
-            // 1. Swap the image to bonk1.png
-            bonkImage.src = "/images/bonk1.png";
-            
-            // 2. Add visual effects
-            triggerRandomEffect();
-
-            // 3. Swap back to bonk0.png after 300 milliseconds
-            setTimeout(() => {
-                bonkImage.src = "/images/bonk0.png";
-            }, 300);
-
-            // 4. Update Counter Logic
-            let currentCount = parseInt(bonkBtn.innerText) || 0;
-            bonkBtn.innerText = currentCount + 1; // Optimistic update on the button
-
-            try {
-                // GET request to /counter to increment
-                const response = await fetch(bonkIncrementUrl); 
-                if (!response.ok) throw new Error("Failed to send bonk");
-                const data = await response.json();
-                if (data.count !== undefined) {
-                    bonkBtn.innerText = data.count; // Ensure sync with server
-                }
-            } catch (error) {
-                console.error("Error sending bonk:", error);
-            }
-        });
 
         // --- POPUP LOGIC ---
         const gifUrls = [
@@ -617,14 +466,6 @@
             "D O L P H I N S.sys",
             "VIRUS_DETECTED.exe"
         ];
-
-        let activeOrPendingPopups = 0; 
-
-        function triggerPopupCascade() {
-            const delays = [500, 1000, 1500, 2200, 2600]; 
-            activeOrPendingPopups += delays.length; 
-            delays.forEach(delay => setTimeout(createRandomPopup, delay));
-        }
 
         function createRandomPopup() {
             const randomGif = gifUrls[Math.floor(Math.random() * gifUrls.length)];
@@ -658,38 +499,20 @@
                 triggerRandomEffect();
                 setTimeout(() => {
                     popup.remove();
-                    activeOrPendingPopups--; 
-                    if (activeOrPendingPopups === 0) {
-                        triggerPopupCascade();
-                    }
-                }, 350); // Changed from 300 to 350
+                    // Open a new tab as soon as this one is closed
+                    // createRandomPopup();
+                }, 350); 
             });
         }
 
-        // --- UI INTERACTION LOGIC (CLOSING WINDOWS) ---
-        document.getElementById("close-btn").addEventListener("click", () => {
-            const windowElement = document.getElementById("visitor-window");
-            windowElement.classList.add("closing");
-            triggerRandomEffect();
-            setTimeout(() => {
-                windowElement.style.display = "none";
-            }, 350); // Changed from 300 to 350
-            triggerPopupCascade();
+        // Initialize: Spawn 5 popups immediately on load
+        window.addEventListener('DOMContentLoaded', () => {
+            for (let i = 0; i < 5; i++) {
+                // Staggered slightly so they don't pop up at the exact same millisecond
+                setTimeout(createRandomPopup, i * 150);
+            }
         });
 
-        document.getElementById("bonk-close-btn").addEventListener("click", () => {
-            const bonkWindow = document.getElementById("bonk-window");
-            bonkWindow.classList.add("closing");
-            triggerRandomEffect();
-            setTimeout(() => {
-                bonkWindow.style.display = "none";
-            }, 350); // Changed from 300 to 350
-        });
-
-        // Initialize Everything
-        initBonkWindow();
-        fetchHitCount();
-        fetchBonkCount();
     </script>
 </body>
 </html>
